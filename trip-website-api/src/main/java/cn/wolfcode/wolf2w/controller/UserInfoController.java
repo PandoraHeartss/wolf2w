@@ -21,5 +21,10 @@ public class UserInfoController {
         return userInfoService.getById(id);
     }
 
+    @GetMapping("/detail")
+    public Object detail2(Long id){
+        return userInfoService.getById(id);
+    }
+
 
 }
