@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/gonglve.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/vue/moment.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <script type="text/javascript" src="/js/system/strategy/index.js"></script>
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "strategy";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="wrapper" id="app" v-cloak>
+    <div class="focus">
+        <div class="mdd_nav">
+            <div class="gonglve-nav">
+                <div class="nav-item">
+                    <div class="nav-title">
+                        <h3>海外攻略推荐排行</h3>
+                        <b class="gn-arrow"></b>
+                    </div>
+                    <div class="nav-panel rank-panel">
+                        <ol>
+                            <li class="top3" v-for="(d,index) in abroadCds">
+                                <em class="rank-num">{{index + 1}}</em>
+                                <strong>
+                                    <a :href="'/views/destination/detail.html?id='+d.destId" target="_blank">{{d.destName}}</a>
+                                </strong>
+                                <a :href="'/views/strategy/detail.html?id='+d.strategyId" target="_blank">{{d.strategyTitle}}</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-title">
+                        <h3>国内攻略推荐排行</h3>
+                        <b class="gn-arrow"></b>
+                    </div>
+                    <div class="nav-panel rank-panel">
+                        <ol>
+                            <li class="top3" v-for="(d,index) in chinaCds">
+                                <em class="rank-num">{{index + 1}}</em>
+                                <strong>
+                                    <a :href="'/views/destination/detail.html?id='+d.destId" target="_blank">{{d.destName}}</a>
+                                </strong>
+                                <a :href="'/views/strategy/detail.html?id='+d.strategyId" target="_blank">{{d.strategyTitle}}</a>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+                <div class="nav-item">
+                    <div class="nav-title">
+                        <h3>热门攻略推荐排行</h3>
+                        <b class="gn-arrow"></b>
+                    </div>
+                    <div class="nav-panel rank-panel">
+                        <ol>
+                            <li class="top3" v-for="( d,index) in hotCds">
+                                <em class="rank-num">{{index + 1}}</em>
+                                <strong>
+                                    <a :href="'/views/destination/detail.html?id='+d.destId" target="_blank">{{d.destName}}</a>
+                                </strong>
+                                <a :href="'/views/strategy/detail.html?id='+d.strategyId" target="_blank">{{d.strategyTitle}}</a>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+                <div class="nav-item">
+                    <div class="nav-title">
+                        <h3>主题推荐</h3>
+                        <b class="gn-arrow"></b>
+                    </div>
+                    <div class="nav-panel category-panel">
+                        <dl class="clearfix" v-for="tc in themeCds">
+                            <dt>{{tc.themeName}}</dt>
+                            <dd v-for="d in tc.dests"><a :href="'/views/strategy/list.html?destId='+d.id">{{d.name}}</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="input_like">
+                <div>
+                    <span></span>
+                    <input type="text" placeholder="请输入想去的地方，如:香港"/>
+                    <div class="clear"></div>
+                </div>
+                <div id="search_result">
+                    <strong>此攻略还没有上线，敬请期待</strong>
+                    <ul>
+                        <li>
+                            <em>
+                                <a href="javascript:;" style="color: #666">
+                                    <b class="highlight">香</b>港</a>
+                            </em>
+                        </li>
+                        <li>
+                            <em>
+                                <a href="javascript:;" style="color: #666">
+                                    <b class="highlight">香</b>港</a>
+                            </em>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="app_d">
+                <h3>
+                    <a>
+                        <img src="/images/qrcode.jpg" width="50" height="50"/>
+                    </a>
+                </h3>
+                <div class="domn_in">
+                    <h4>
+                        <a href="javascript:;">骡窝窝自由行APP下载</a>
+                    </h4>
+                    <p>
+                        <a style="cursor: auto;">iPhone版</a>
+                        <span>|</span>
+                        <a style="cursor: auto;">Android版</a>
+                        <span>|</span>
+                        <a style="cursor: auto;">iPad版</a>
+                    </p>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!--攻略推荐-->
+        <div class="slide">
+            <ul id="slide_box">
+                <li v-for="c in commends">
+                    <a :href="'/views/strategy/detail.html?id='+c.refid">
+                        <img :src="c.coverUrl"/>
+                    </a>
+                </li>
+            </ul>
+            <ol id="thumb_box">
+                <li v-for="( c,index) in commends" :data-value="index" :class="index == 0?'on':''"></li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="gl_nav">
+        <a href="javascript:;">全部旅游攻略导航</a>
+        <span>>></span>
+        <strong id="currentNav"></strong>
+        <div class="clear"></div>
+    </div>
+    <div class="gl_wrap">
+        <h3>
+            <a href="javascript:;">国内攻略</a>
+        </h3>
+        <ol>
+            <li v-for="t in chinas">
+                <a href="javascript:;" class="strategySearch" :data-refid="t.refid" :data-type="t.type"
+                   @click="strategySearch($event, t.type,t.refid, t.name)">{{t.name}}({{t.count}})</a>
+            </li>
+        </ol>
+        <span class="sp_toggle">
+            <a href="javascript:void(0);" class="more_selector">更多</a>
+        </span>
+        <div class="clear"></div>
+    </div>
+    <div class="gl_wrap">
+        <h3>
+            <a href="javascript:;">国外攻略</a>
+        </h3>
+        <ol>
+            <li v-for="t in abroads">
+                <a href="javascript:;" class="strategySearch" :data-refid="t.refid" :data-type="t.type"
+                   @click="strategySearch($event, t.type,t.refid, t.name)">{{t.name}}({{t.count}})</a>
+            </li>
+
+        </ol>
+        <span class="sp_toggle">
+            <a href="javascript:void(0);" class="more_selector">更多</a>
+        </span>
+        <div class="clear"></div>
+    </div>
+
+    <div class="gl_wrap">
+        <h3>
+            <a href="javascript:;">主题攻略</a>
+        </h3>
+        <ol>
+            <li v-for="t in themes">
+                <a href="javascript:;" class="strategySearch" :data-refid="t.refid" :data-type="t.type"
+                   @click="strategySearch($event, t.type,t.refid, t.name)">{{t.name}}({{t.count}})</a>
+            </li>
+        </ol>
+        <span class="sp_toggle">
+            <a href="javascript:void(0);" class="more_selector">更多</a>
+        </span>
+        <div class="clear"></div>
+    </div>
+
+    <div class="p_upw">
+        <div class="uptime_p">
+            <a href="javascript:;" @click="orderSearch($event,'viewnum')" data-v="viewnum" class="upt_on">最受欢迎</a>
+            <span>|</span>
+            <a href="javascript:;" @click="orderSearch($event,'create_time')" data-v="create_time">更新时间</a>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <form id="searchForm">
+        <input type="hidden" name="currentPage" id="currentPage" value="1">
+        <input type="hidden" name="orderBy" id="orderBy" value="viewnum">
+        <input type="hidden" name="type" id="typeId" value="-1">
+        <input type="hidden" name="refid" id="refid" value="-1">
+    </form>
+
+
+    <div class="gonglve_wrap">
+        <div class="tn-item clearfix" v-for="c in page.records">
+            <div class="tn-image">
+                <a href="javascript:;">
+                    <img :src="c.coverUrl"/>
+                </a>
+            </div>
+            <div class="tn-wrapper">
+                <dl>
+                    <dt>
+                        <a :href="'/views/strategy/detail.html?id='+c.id">{{c.title}}</a>
+                    </dt>
+                    <dd v-html="c.summary"></dd>
+                </dl>
+                <div class="tn-extra">
+                    <span>{{c.destName}}</span>
+                    <span>浏览（{{c.viewnum}}）</span>
+                    <span>{{c.create_time| dateFormat}}</span>
+                </div>
+            </div>
+        </div>
+        <!--分页-->
+        <div style="float: right">
+            <div style="float: left;"><span style="line-height:30px"> 共{{page.pages}}页 / {{page.total}}条&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+        </div>
+    </div>
+
+
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/strategy/index.js"></script>
+</html>

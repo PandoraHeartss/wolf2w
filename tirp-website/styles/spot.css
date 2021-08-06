@@ -1,0 +1,87 @@
+.row-bg {
+    background-color: #fafafa;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+.row-picture .bd {
+    height: 370px;
+    position: relative;
+    overflow: hidden;
+}
+
+.row-picture .pic-big {
+    float: left;
+    width: 690px;
+    margin-right: 4px;
+    overflow: hidden;
+}
+
+.row-picture .pic-small {
+    float: left;
+    width: 305px;
+    height: 183px;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+
+.row-picture .bd span {
+    position: absolute;
+    height: 20px;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .7);
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 12px;
+    left: 20px;
+    bottom: 15px;
+    border-radius: 10px;
+}
+
+.mod {
+    padding: 30px 0;
+}
+
+.wrapper, .mod {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.summary {
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: #333;
+    line-height: 24px;
+}
+
+.mod-detail .baseinfo {
+    margin: 10px 0 25px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.mod-detail .baseinfo li {
+    float: left;
+    width: 280px;
+    padding: 3px 30px 3px 0;
+}
+
+.mod-detail .baseinfo li + li {
+    border-left: 1px solid #eee;
+    padding: 3px 30px;
+}
+
+.mod-detail .baseinfo li {
+    float: left;
+    width: 280px;
+    padding: 3px 30px 3px 0;
+}
+
+.mod-detail dl {
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 24px;
+}

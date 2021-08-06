@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="../../styles/base.css" rel="stylesheet" type="text/css">
+    <link href="../../styles/homepage.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <script type="text/javascript" src="/js/system/homepage.js"></script>
+</head>
+<body style="position: relative;">
+<div id="app">
+    <div class="topBar">
+        <div class="topBarC">
+            <div class="logo"><a title="马蜂窝自由行" href="javascript:;">马蜂窝自由行</a></div>
+            <div class="t_nav">
+                <ul id="pnl_nav" data-cs-t="headnav_wo">
+                    <li data-cs-p="index">
+                        <strong class="t"><a href="javascript:;">首页</a></strong>
+                    </li>
+                    <li data-cs-t="wenda" data-cs-p="wenda">
+                        <strong class="t"><a data-cs-p="from_wo_nav" href="javascript:;">问答</a></strong>
+                    </li>
+                    <li data-cs-t="things" data-cs-p="things">
+                        <strong class="t"><a data-cs-p="from_wo_nav" href="javascript:;">马蜂窝周边</a></strong>
+                    </li>
+                    <li data-cs-p="together">
+                        <strong class="t"><a href="javascript:;">结伴</a></strong>
+                    </li>
+                    <li data-cs-p="group">
+                        <strong class="t"><a href="javascript:;">小组</a></strong>
+                    </li>
+                    <li data-cs-p="mall">
+                        <strong class="t"><a href="javascript:;">蜂首俱乐部</a></strong>
+                    </li>
+                    <li class="drop" data-cs-p="other">
+                        <strong class="t"><a href="javascript:;">更多<b></b></a></strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="t_search">
+                <form method="GET" action="/search/s.php" name="search">
+                    <input type="text" class="key" value="" name="q" id="word">
+                    <input type="submit" value="" class="btn">
+                </form>
+            </div>
+
+            <div class="t_info">
+                <div class="pagelet-block">
+                    <ul class="user_info">
+                        <li class="daka">
+                                <span class="daka_btn" id="_j_dakabtn" data-japp="daka">
+                                    <a role="button" title="打卡" class="daka_before">打卡</a>
+                                    <a role="button" title="打卡推荐" class="daka_after">打卡推荐</a>
+                                </span>
+                        </li>
+                        <li id="pnl_user_msg" data-hoverclass="on" class="msg _j_hoverclass">
+                                <span id="oldmsg" class="oldmsg"><a href="javascript:;"
+                                                                    class="infoItem">消息<b></b></a></span>
+                            <ul id="head-msg-box" class="drop-bd">
+                                <li><a href="javascript:;" rel="nofollow">私信</a></li>
+                                <li><a href="javascript:;" rel="nofollow">小组消息</a></li>
+                                <li><a href="javascript:;" rel="nofollow">系统通知</a></li>
+                                <li><a href="javascript:;" rel="nofollow">问答消息</a></li>
+                                <li><a href="javascript:;" rel="nofollow">回复消息</a></li>
+                                <li><a href="javascript:;" rel="nofollow">喜欢与收藏</a></li>
+                                <li><a href="javascript:;" rel="nofollow">好友动态</a></li>
+                            </ul>
+                        </li>
+                        <li class="ub-item ub-new-msg" id="head-new-msg">
+                        </li>
+                        <li class="account _j_hoverclass" data-hoverclass="on" id="pnl_user_set">
+                                <span class="t"><a class="infoItem" href="javascript:;"><img
+                                        src="http://b2-q.mafengwo.net/s12/M00/35/B7/wKgED1uqIs-AMYTwAAAX-VIKIo0071.png?imageMogr2%2Fthumbnail%2F%2132x32r%2Fgravity%2FCenter%2Fcrop%2F%2132x32%2Fquality%2F90"
+                                        width="32" height="32" align="absmiddle"><b></b></a></span>
+                            <div class="uSet c">
+                                <div class="asset">
+                                    <a class="coin" href="javascript:;" target="_blank" rel="nofollow">蜂蜜 0</a>
+                                    /
+                                    <a class="coin" href="javascript:;" target="_blank" id="head-my-honey"
+                                       rel="nofollow" data-cs-p="coin">金币 579</a>
+                                </div>
+                                <a href="javascript:;">我的马蜂窝<b class="tb-level">LV.3</b></a>
+                                <a href="javascript:;" target="_blank">写游记</a>
+                                <a href="javascript:;" target="_blank">预约游记</a>
+                                <a href="javascript:;" target="_blank">我的足迹</a>
+                                <a href="javascript:;" target="_blank">我的问答</a>
+                                <a href="javascript:;" target="_blank">我的好友</a>
+                                <a href="javascript:;" target="_blank">我的收藏</a>
+                                <a href="javascript:;" target="_blank">我的路线</a>
+                                <a href="javascript:;" target="_blank">我的订单</a>
+                                <a href="javascript:;" target="_blank">我的优惠券</a>
+                                <a href="javascript:;" target="_blank">设置</a>
+                                <a href="javascript:;">退出</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="banner">
+            <div class="tags_bar">
+                <div class="center clearfix">
+                    <ul class="flt2">
+                        <li class="on"><a class="tags_link" href="javascript:;" title="我的窝">我的窝</a></li>
+                        <li><a class="tags_link" href="./mytravelnotes.html" title="我的游记">我的游记</a></li>
+                        <li><a class="tags_link" href="./review.html" title="我的点评">我的点评</a></li>
+                        <li id="_j_pathnav"><a class="tags_link" href="../collection/collection.html"
+                                               title="我的收藏">我的收藏</a></li>
+                        <li><a class="tags_link" href="javascript:;" title="我的订单">我的订单</a></li>
+                        <li><a class="tags_link" href="./setting.html" title="设置">设置</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="center clearfix">
+            <div class="side_bar flt1">
+                <div class="MAvatar">
+                    <div class="MAvaImg hasAva">
+
+                        <img :src="owner?owner.headImgUrl:''"
+                             height="120" width="120"><a href="javascript:;"><i
+                            class="Mphoto"></i></a>
+                    </div>
+                    <div class="MAvaName">{{owner?owner.nickname:''}}
+                        <i class="MGenderMale"></i>
+                    </div>
+
+                    <div class="its_tags">
+                        <a href="javascript:;" target="_blank" title="VIP"><i class="vip"></i></a>
+                        <a href="javascript:;" target="_blank" title="分舵"><i class="duo"></i>
+                        </a><a href="javascript:;" target="_blank" title="指路人"><i class="zhiluren"></i></a>
+                    </div>
+                    <div class="MAvaInfo clearfix MAvaMyInfo">
+                            <span class="MAvaLevel flt1">等级：<a href="javascript:;" title="Lv.5"
+                                                               target="_blank">Lv.{{owner.level}}</a></span>
+                        <span class="MAvaPlace flt1" title="广州">现居：{{owner.city}}</span>
+                        <span class="MAvaSet"><a title="设置" href="javascript:;" target="_blank"></a></span>
+                    </div>
+                    <div id="_j_profilearea" class="MAvaProfile">
+                        <div>
+                            <pre>{{owner.info}}</pre>
+                        </div>
+                        <div class="MAvaInput _j_inputarea hide">
+                            <textarea id="_j_introarea" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100"></textarea>
+                            <a role="button" id="_j_introsaver" class="MAvaBtn" title="保存">保存</a>
+                        </div>
+
+                    </div>
+                    <div class="MAvaMore clearfix">
+                        <div class="MAvaNums">
+                            <strong><a :href="'/views/personal/follow.html?ownerId='+owner.id">13</a></strong>
+                            <p>关注</p>
+                        </div>
+                        <div class="MAvaNums">
+                            <strong><a :href="'/views/personal/fans.html?ownerId='+owner.id">0</a></strong>
+                            <p>粉丝</p>
+                        </div>
+                        <div class="MAvaNums last">
+                            <strong><a href="javascript:;" target="_blank">20</a></strong>
+                            <p>蜂蜜</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="MUsers">
+                    <div class="MUsersTitle">最新访客 <a :href="'/views/personal/visitor.html?ownerId='+owner.id">更多</a>
+                    </div>
+                    <div class="MUsersDetail">
+                        <ul class="clearfix">
+                            <li v-for="u in visitors">
+                                <a :href="'/views/personal/homepage.html?ownerId='+u.id" target="_blank">
+                                    <img :src="u.headImgUrl" height="48" width="48"></a>
+                                <p><a :href="'/views/personal/homepage.html?ownerId='+u.id" target="_blank">{{u.nickname}}</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="MUsersBehavior">
+                        <span>累计访问: <i style="color: blue">{{totalView}}</i></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>今日: <i style="color: blue">{{todayView}}</i></span>
+                    </div>
+                </div>
+
+
+                <div class="MUsers">
+                    <div class="MUsersTitle">我的关注</div>
+                    <div class="MUsersDetail" id="_j_followcnt">
+                        <div class="MUsersAtom">
+                            <ul class="clearfix _j_followlist">
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://b4-q.mafengwo.net/s12/M00/03/71/wKgED1wW0XCALX2IAADYXbhIC3Q65.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="桃小桃和她的喵" title="桃小桃和她的喵">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="桃小桃和她的喵">桃小桃和她的喵</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://p3-q.mafengwo.net/s8/M00/ED/05/wKgBpVYUydOAKdaaAAlyxu5BVPc94.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="云云" title="云云">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="云云">云云</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://b1-q.mafengwo.net/s12/M00/B0/D7/wKgED1xEOeCAepriAADB6P4hrk080.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="文刀水羊" title="文刀水羊">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="文刀水羊">文刀水羊</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://n4-q.mafengwo.net/s11/M00/1A/8F/wKgBEFr-7WKAfFPiAABz4qeKy-c65.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="翔太" title="翔太">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="翔太">翔太</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://b3-q.mafengwo.net/s9/M00/B2/19/wKgBs1aVP9uAeflmAASv31idm1M01.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="Sordino_Li" title="Sordino_Li">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="Sordino_Li">Sordino_Li</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://n1-q.mafengwo.net/s9/M00/D3/93/wKgBs1da3ceAFTPMAACjdPpGr3M65.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="butterflyvalley" title="butterflyvalley">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank"
+                                          title="butterflyvalley">butterflyvalley</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://b4-q.mafengwo.net/s9/M00/C3/D2/wKgBs1hYqd-AIbARAAClh_wvlnc64.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="幸存者格蕾丝" title="幸存者格蕾丝">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="幸存者格蕾丝">幸存者格蕾丝</a></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" target="_blank">
+                                        <img src="http://p1-q.mafengwo.net/s10/M00/5F/95/wKgBZ1mWdF6AFf2fAAB1tTikS6w24.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                             height="48" width="48" alt="法系强迫症" title="法系强迫症">
+                                    </a>
+                                    <p><a href="javascript:;" target="_blank" title="法系强迫症">法系强迫症</a></p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="MSimplePages _j_follow_page_action" data-total="13"><span
+                                class="MPrev _j_prev disabled" title="上一页"></span><span class="MNext _j_next"
+                                                                                        title="下一页"></span></div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="content flt2">
+                <div class="common_block my_notes">
+                    <div class="notes_list">
+                        <ul>
+                            <li data-order="1" data-top="0">
+                                <dl>
+                                    <dt>
+                                        <a href="javascript:;" target="_blank" id="_j_coverlink_12894894"><img
+                                                src="http://b4-q.mafengwo.net/s12/M00/1F/F1/wKgED1uHx-2AVONCAASTAwl30cw73.jpeg?imageMogr2%2Fthumbnail%2F%21680x400r%2Fgravity%2FCenter%2Fcrop%2F%21680x400%2Fquality%2F90"
+                                                height="400" width="680" alt="封面"></a>
+                                        <div class="hover_item">
+                                            <div class="thumb_description">
+                                                <strong>北京/</strong>
+                                                <span>中国/</span>
+                                            </div>
+                                        </div>
+                                    </dt>
+                                    <dd>
+                                        <div class="note_title clearfix">
+                                            <div class="MDing">
+                                                <span id="topvote12894894">0</span><a role="button"
+                                                                                      data-japp="articleding"
+                                                                                      rel="nofollow" data-iid="12894894"
+                                                                                      data-vote="0" title="顶一下">顶</a>
+                                            </div>
+                                            <div class="note_info">
+                                                <h3>
+                                                    <a href="javascript:;" target="_blank" title="游记1">游记1</a></h3>
+                                                <div class="note_more">
+
+                                                    <span class="MInfoNum"><i class="MIcoView"></i><em>0/0</em></span>
+
+                                                    <span class="MInfoNum"><i class="MIcoStar"></i><em>0</em></span>
+                                                    <span class="time">2019-05-23 09:32:58</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="note_word">
+                                            sfs
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li data-order="2" data-top="0">
+                                <dl>
+                                    <dt>
+                                        <a href="javascript:;" target="_blank" id="_j_coverlink_12878770"><img
+                                                src="http://images.mafengwo.net/images/home_new2015/default.jpg"
+                                                height="400" width="680" alt="封面"></a>
+                                        <div class="hover_item">
+                                            <div class="thumb_description">
+                                                <strong>北京/</strong>
+                                                <span>中国/</span>
+                                            </div>
+                                        </div>
+                                    </dt>
+                                    <dd>
+                                        <div class="note_title clearfix">
+                                            <div class="MDing">
+                                                <span id="topvote12878770">0</span><a role="button"
+                                                                                      data-japp="articleding"
+                                                                                      rel="nofollow" data-iid="12878770"
+                                                                                      data-vote="0" title="顶一下">顶</a>
+                                            </div>
+                                            <div class="note_info">
+                                                <h3>
+                                                    <a href="javascript:;" target="_blank" title="222222">222222</a>
+                                                </h3>
+                                                <div class="note_more">
+                                                    <span class="MInfoNum"><i class="MIcoView"></i><em>3/0</em></span>
+                                                    <span class="MInfoNum"><i class="MIcoStar"></i><em>0</em></span>
+                                                    <span class="time">2019-05-22 16:43:52</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="note_word">
+                                            332323424
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="more_notes">
+                        <a class="btn_deleted" href="javascript:;"><i></i>已删除游记</a>
+                        <a href="javascript:;">共<strong>2</strong>篇游记 </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--内容-->
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/personal/homepage.js"></script>
+</html>

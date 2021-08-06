@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelspot.css" rel="stylesheet" type="text/css">
+    <link href="/styles/select.css" rel="stylesheet" type="text/css">
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <script type="text/javascript" src="/js/system/destination/detail.js"></script>
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "destination";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div id="app" v-cloak>
+    <div id="container">
+        <div class="row row-placeTop row-bg">
+            <div class="wrapper">
+                <div class="extra">
+                    <div class="action">
+                        <a class="btn-collect" href="javascript:void(0)" _iswg="0" _mddid="14674" data-act="want_go"
+                           class="icon"></i>收藏</a>
+                        <a class="btn-been" href="javascript:void(0)" _ispa="0" _mddid="14674" data-act="set_path"><i
+                                class="icon"></i>去过</a>
+                    </div>
+                </div>
+                <div class="crumb">
+                    <div class="item"><a href="/views/destination/index.html">目的地</a><em>&gt;</em></div>
+                    <div class="item" v-for="t in toasts">
+                        <a :href="'/views/destination/detail.html?id='+t.id">{{t.name}}</a><em>&gt;</em>
+                    </div>
+
+                    <div class="item">
+                        <div class="drop">
+                            <span class="hd"><a href="javascript:;">{{dest.name}}<i></i></a></span>
+                            <div class="bd">
+                                <i class="arrow"><b></b></i>
+                                <div class="col">
+                                    <!--h3>热门国家</h3-->
+                                    <ul class="clearfix">
+                                        <li><a href="JavaScript:;" target="_blank">{{dest.name}}概括</a></li>
+                                        <li><a href="#travel" target="_blank">{{dest.name}}游记</a></li>
+                                        <li><a href="#strategy" target="_blank">{{dest.name}}攻略</a></li>
+                                        <li><a href="javascript:;" target="_blank">{{dest.name}}跟团游</a></li>
+                                    </ul>
+                                </div>
+                                <!--div class="more"><a href="#">&gt;&gt;更多国家</a></div-->
+                            </div>
+                        </div>
+                        <em>&gt;</em>
+                    </div>
+                    <div class="item cur"><strong>{{dest.name}}概览</strong></div>
+                </div>
+                <div class="title" style="position: relative;">
+                    <h1>{{dest.name}}</h1>
+                    <a class="num-photo" href="javascript:;" target="_blank"></a>
+                    <br>
+                    <span class="en">{{dest.english}}</span>
+                    <div style="position: absolute;top: 3px;right: 220px;"><img
+                            src="https://b3-q.mafengwo.net/s12/M00/84/BF/wKgED1v-df2Ab5KFAAFioLPYatQ535.png"
+                            style="width: 390px;"></div>
+                </div>
+                <div class="place-navbar" style="border-top: 0;">
+                    <div class="navbar-con">
+                        <ul class="navbar clearfix navbar-first-level-warper">
+                            <li class="navbar-overview city-guide">
+                                <a class="navbar-btn" href="javascript:;">
+                                    <i class="navbar-icon"></i><span>概况</span>
+                                </a>
+                            </li>
+                            <li class="navbar-line">
+                                <a class="navbar-btn" href="#travel">
+                                    <i class="navbar-icon"></i><span>游记</span>
+                                </a>
+                            </li>
+                            <li class="navbar-line">
+                                <a class="navbar-btn navbar-local" href="#strategy">
+                                    <i class="navbar-icon"></i><span>攻略</span>
+                                </a>
+                            </li>
+                            <li class="navbar-line">
+                                <a class="navbar-btn navbar-sales" href="javascript:;">
+                                    <i class="navbar-icon"></i><span>跟团游</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="overview-drop hide" style="height: auto; overflow: hidden;">
+                            <div class="drop-bd">
+
+                                <dl class="clearfix" v-for="c in catalogs">
+                                    <dt><a :href="'/views/destination/survey.html?destId='+dest.id+'&catalogId='+c.id"
+                                           target="_blank">{{c.name}}</a></dt>
+                                    <dd>
+                                        <a :href="'/views/strategy/detail.html?id='+s.id" target="_blank"
+                                           v-for="s in c.strategies">{{s.subTitle}} <span>|</span> </a>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagelet-block">
+            <div class="row row-local row-bg">
+                <div class="wrapper">
+                    <h2 class="r-title"><a href="javascript:;" name="strategy">{{dest.name}}攻略</a></h2>
+                    <div class="local-pro">
+                        <ul class="clearfix">
+
+                            <li v-for="sd in strategies">
+                                <a class="img" :href="'/views/strategy/detail.html?id='+sd.id" target="_blank">
+                                    <img :src="sd.coverUrl" width="320" height="170">
+                                </a>
+                                <a class="title" :href="'/views/strategy/detail.html?id='+sd.id" target="_blank">{{sd.title}}</a>
+                                <p>{{sd.summary}}</p>
+                                <div class="more"><a class="a-link" :href="'/views/strategy/detail.html?id='+sd.id"
+                                                     target="_blank"><i
+                                        class="icon-link"></i>查看详情</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="r-more"><a :href="'/views/strategy/list.html?destId='+dest.id" target="_blank">查看全部</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagelet-block">
+            <div class="row row-travels">
+                <div class="wrapper">
+                    <div class="navbar clearfix">
+                        <ul class="tn-nav">
+                            <li class="active"><h2 class="r-title"><a href="javascript:;"
+                                                                      name="travel">{{dest.name}}游记</a></h2></li>
+                        </ul>
+                    </div>
+                    <div class="relcontent yj" style="display: block;">
+                        <form id="travelForm">
+                            <div class="navbar-sub clearfix">
+                                排序：
+                                <select class="com-opt" name="orderBy" @change="conditionChange">
+                                    <option value="create_time">最新</option>
+                                    <option value="viewnum">最热</option>
+                                </select>
+
+                                出发时间：
+                                <select class="com-opt" name="travelTimeType" @change="conditionChange">
+                                    <option value="-1">不限</option>
+                                    <option value="1">1-2月</option>
+                                    <option value="2">3-4月</option>
+                                    <option value="3">5-6月</option>
+                                    <option value="4">7-8月</option>
+                                    <option value="5">9-10月</option>
+                                    <option value="6">11-12月</option>
+                                </select>
+
+                                人均花费：
+                                <select class="com-opt" name="consumeType" @change="conditionChange">
+                                    <option value="-1">不限</option>
+                                    <option value="1">1-999</option>
+                                    <option value="2">1K-6K</option>
+                                    <option value="3">6K-20K</option>
+                                    <option value="4">20K以上</option>
+                                </select>
+
+                                出行天数：
+                                <select class="com-opt" name="dayType" @change="conditionChange">
+                                    <option value="-1">不限</option>
+                                    <option value="1">3天以下</option>
+                                    <option value="2">4-7天</option>
+                                    <option value="3">8-14天</option>
+                                    <option value="4">15天以上</option>
+                                </select>
+
+                            </div>
+                        </form>
+                        <div class="_notelist">
+                            <div class="tn-list" id="travelPage">
+                                <div class="tn-item clearfix" v-for="t in page.records">
+                                    <div class="tn-image">
+                                        <a href="javascript:;" target="_blank">
+                                            <img class="lazy" width="220" height="150" :alt="t.subTitle"
+                                                 :src="t.coverUrl" style="display: inline;">
+                                        </a>
+                                    </div>
+                                    <div class="tn-wrapper" data-focus="" data-topsort="" data-star="0">
+                                        <dl>
+                                            <dt>
+                                                <a :href="'/views/travel/detail.html?id='+t.id+'&destId='+t.destId"
+                                                   class="title-link" target="_blank">{{t.title}}</a>
+                                            </dt>
+                                            <dd><a :href="'/views/travel/detail.html?id='+t.id+'&destId='+t.destId"
+                                                   target="_blank">{{t.summary}}</a>
+                                            </dd>
+                                        </dl>
+                                        <div class="tn-extra">
+                                    <span class="tn-ding">
+                                        <a class="btn-ding"
+                                           :href="'/views/travel/detail.html?id='+t.id+'&destId='+t.destId"
+                                           data-japp="articleding"
+                                           data-iid="12663570" data-vote="5"></a>
+                                        <em id="topvote12663570">{{t.thumbsupnum}}</em>
+                                    </span>
+                                            <span class="tn-user"><a href="javascript:;" target="_blank"
+                                                                     rel="nofollow"><img :src="t.author.headImgUrl">{{t.author.nickname}}</a></span>
+                                            <span class="tn-nums"><i></i>{{t.viewnum}}/{{t.favornum}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <!--分页-->
+                                <div style="float: right">
+                                    <div style="float: left;"><span style="line-height:30px"> 共{{page.pages}}页 / {{page.total}}条&nbsp;&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="pagelet-block">
+            <div class="row row-placeList">
+                <div class="wrapper">
+                    <h2 class="r-title">{{dest.name}}周边【拓展】</h2>
+                    <div class="bd">
+                        <ul class="clearfix">
+                            <li class="item">
+                                <div class="img">
+                                    <img class="lazy" height="200" width="320"
+                                         src="/images/default/wKgB3FGMgSCAZo0qAAgGckFTqJA54.jpeg"
+                                         style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>香港</strong><br><b>40576</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">香港迪士尼乐园</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">太平山顶</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">香港海洋公园</a>
+                                    </dd>
+                                </dl>
+                            </li>
+
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB3FECAVCANTk_AAWNVF8sjYw25.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>深圳</strong><br><b>33108</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">东部华侨城</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">西涌海滩</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">世界之窗</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB6lP0VpCADPDPAAPICO-I-Iw57.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>珠海</strong><br><b>17660</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">珠海长隆海洋王国</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">外伶仃岛</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">情侣路</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB4lIlVk6AIMCDAAStueA6sSU73.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>惠州</strong><br><b>7214</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">双月湾</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">巽寮湾</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">惠州西湖</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB6lRZ5s6ARJzuAAjCwdIPcK865.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>佛山</strong><br><b>9649</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">顺德清晖园</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">佛山祖庙</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">岭南天地</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB3FIMRvaAdrjoAAGCmIetJvQ75.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>韶关</strong><br><b>6248</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">丹霞山</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">广东大峡谷</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">南华禅寺</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB4lMO9uuAbh9fAAKP4vgV8Os70.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>东莞</strong><br><b>10353</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">下坝坊</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">松山湖风景区</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">可园博物馆</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgB4lMNziCASS7YAADtzNGSAUU44.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>中山</strong><br><b>8276</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">孙中山故居纪念馆</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">中山城-中山影视城</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">中山詹园</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a href="javascript:;" target="_blank">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/default/wKgBEFqTegaAGG-GAAgeDCxhmAQ61.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a href="javascript:;"
+                                           target="_blank"><strong>肇庆</strong><br><b>8276</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">肇庆大山</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">肇庆影视城</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">詹园</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/destination/detail.js"></script>
+</html>

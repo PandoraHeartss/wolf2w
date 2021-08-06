@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/strategyDetail.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script type="text/javascript" src="/js/system/strategy/detail.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/vue/moment.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+
+</head>
+
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "strategy";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="wrap clearfix " id="app" v-cloak>
+
+    <div class="local-con clearfix">
+        <div class="sideL">
+            <div class="l-topic">
+                <h1>{{strategy.title}}</h1>
+                <div class="sub-tit">
+                    <i class="i-zan"></i>
+                    51人体验过
+                    <span class="time" style="margin-left: 20px;"><em>阅读 {{vo.viewnum}}</em></span>
+                    <span class="time">旅游攻略<em>{{strategy.createTime | dateFormat}}</em></span>
+                </div>
+
+                <div class="user_list">
+                    <div class="clearfix">
+                        <div class="author">
+                            <a href="javascript:;" target="_blank">
+                                <img src="https://p3-q.mafengwo.net/s13/M00/AB/00/wKgEaVy2nheAN9y5AAorszCM1vQ56.jpeg?imageMogr2%2Fthumbnail%2F%21120x120r%2Fgravity%2FCenter%2Fcrop%2F%21120x120%2Fquality%2F90"
+                                     alt="" width="90" height="90">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="in-t">
+                                <a href="javascript:;" target="_blank">
+                                    <span class="name">叩丁狼官方</span>
+                                </a>
+                                <span class="more">6篇游记 429个粉丝</span>
+                            </div>
+                            <p>
+                                人有欢乐，也有苦衷。所谓的完美，其实只是来源于我们的心灵。人生不能重新来过，每个人也不可能重复站在同一个路口。但请不要害怕选择，因为选择没有绝对的好与坏，每种选择都会为你带来一种不一样的感受和别样的精彩。
+                            </p>
+                        </div>
+
+
+                        <div class="contact user-home">
+                            <a href="javascript:;" target="_blank">
+                                <i></i>
+                                <p>TA的窝</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="l-topic">
+                <div class="_j_content" v-html="content.content">
+                </div>
+            </div>
+            <div class="copyRight m_t_20">
+                <p style="text-align: left;">本文著作权归 骡窝窝 所有，任何形式转载请联系作者。©2019 骡窝窝自由行
+                    <a class="r-report" style="display:inline;float: right;color: #999;">举报</a>
+                </p>
+            </div>
+            <div class="l-comment">
+                <div class="clearfix com-form">
+                    <div class="img"><img
+                            src=" http://n1-q.mafengwo.net/s12/M00/35/98/wKgED1uqIreAU9QZAAAXHQMBZ74008.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F100 ">
+                    </div>
+                    <div class="fm-tare user-log">
+                        <textarea class="_j_comment_content" id="content"></textarea>
+                        <button type="button" class="_j_save_comment" @click="commentAdd">评论</button>
+                    </div>
+                </div>
+                <!--评论-->
+                <div class="com-box " id="strategyComment">
+                    <h2>评论（<span class="_comment_num">{{page.totalElements}}</span>）</h2>
+                    <ul id="comments">
+                        <li class="clearfix comment_item " v-for="c in page.content">
+                            <div class="img"><img :src="c.headImgUrl">
+                            </div>
+                            <div class="info" @mouseleave="mouseout($event)" @mouseover="mouseover($event)">
+                                <h3>{{c.nickname}}</h3>
+                                <h4>{{c.createTime | dateFormat}}</h4>
+                                <div class="com-cont">{{c.content}}</div>
+                                <div class="rep-del hide" style="display: none;">
+                                    <i></i>
+                                    <a role="button" class="reply-report">举报
+                                    </a>
+                                    <i></i>
+                                    <span class="_j_comment_like_num">{{c.thumbupnum}}</span>&nbsp;
+
+                                    <a href="javascript:;" class="btn-comment-like _j_like_comment_btn "
+                                       :class="thumbEcho(c.thumbuplist)? 'liked':'like'"
+                                       @click="commentThumb(c.id)">
+                                    </a>
+
+
+                                </div>
+                            </div>
+                        </li>
+
+                        <!--分页-->
+                        <div style="float: right">
+                            <div style="float: left;"><span style="line-height:30px"> 共{{page.totalPages}}页 / {{page.totalElements}}条&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                            <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="sideR">
+            <div class="side_inner _j_sticky_block">
+                <div class="_j_other_column">
+                    <div class="bar-sar clearfix">
+                        <a href="javascript:;" class="_j_goto_comment" @click="contentFocus" title="评论"><i
+                                class="i01"></i><em class="replay_num">{{vo.replynum}}</em></a>
+                        <div class="bs_collect">
+                            <a href="javascript:void(0);" title="收藏" class="bs_btn btn-collect" @click="favor"><i
+                                    class="collect_icon i02 "
+                            ></i>
+                                <em class="favorite_num ">{{vo.favornum}}</em>
+                            </a>
+                        </div>
+                        <div class="bs_share">
+                            <a href="javascript:;" title="分享" class="btn-share bs_btn"><i
+                                    class="i03"></i><em>{{vo.sharenum}}</em></a>
+                        </div>
+
+                        <a href="javascript:;" class="_j_support_btn" title="顶" @click="strategyThumbup()"><i
+                                class="i05 "></i><em
+                                class="support_num">{{vo.thumbsupnum}}</em></a>
+                    </div>
+                    <div class="bs_pop clearfix" style="display: none;">
+                        <a title="分享到新浪微博" rel="nofollow" role="button" class="sina" data-japp="sns_share"
+                           data-jappfedata="" data-key="wb" data-title="盘点 | 广州周边好玩的地方有哪些？"
+                           data-content="盘点 | 广州周边好玩的地方有哪些？"
+                           data-pic="http://b4-q.mafengwo.net/s13/M00/7F/2D/wKgEaVyLhXKABFf5AAI6AbEkm0o40.jpeg?imageView2%2F2%2Fw%2F640%2Fh%2F360%2Fq%2F90"
+                           data-url="http://www.mafengwo.cn/gonglve/ziyouxing/1775.html"></a>
+                        <a title="分享到QQ空间" rel="nofollow" role="button" class="zone" data-japp="sns_share"
+                           data-jappfedata="" data-key="qz" data-title="盘点 | 广州周边好玩的地方有哪些？"
+                           data-content="盘点 | 广州周边好玩的地方有哪些？"
+                           data-pic="http://b4-q.mafengwo.net/s13/M00/7F/2D/wKgEaVyLhXKABFf5AAI6AbEkm0o40.jpeg?imageView2%2F2%2Fw%2F640%2Fh%2F360%2Fq%2F90"
+                           data-url="http://www.mafengwo.cn/gonglve/ziyouxing/1775.html"></a>
+                        <a title="分享到微信" rel="nofollow" role="button" class="weixin" data-japp="weixin_dialog_share"
+                           data-jappfedata=""
+                           data-wx_qr="http://www.mafengwo.cn/qrcode.php?text=https%3A%2F%2Fm.mafengwo.cn%2Fgonglve%2Fziyouxing%2F1775.html&amp;size=150&amp;eclevel=H&amp;logo=&amp;__stk__=d3c9fd1d23b028a45ec5b71a30324cb9_391fafc14c22754068d1543e8cfc5d04"
+                           data-detail="1775"></a>
+                    </div>
+                </div>
+                <!-- <p class="title" id="_j_catalogtitle">攻略目录</p> -->
+            </div>
+            <div class="side-sales">
+                <h3>本周热卖</h3>
+                <ul>
+                    <li>
+                        <a href="javascript:;" target="_blank">
+                                <span class="image"><img
+                                        src="/images/default/wKgBEFs6E4yAPz00AAhnvJUJ1j8238.gif"></span>
+                            <div class="title"
+                                 title="广州长隆野生动物世界门票    随买随用 ／广州长隆旅游度假区／一票通玩 ／ 快速出票快捷入园 ／ 含空中览车及小火车/亲子乐园/赠送电子导览／自然零距离／广州长隆野生动物园">
+                                广州长隆野生动物世界门票 随买随用 ／广州...
+                            </div>
+                            <span class="price">¥260</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" target="_blank">
+                                <span class="image"><img
+                                        src="/images/default/wKgED1wweM2AVCMFAAzr37WPWDI967.gif"></span>
+                            <div class="title"
+                                 title="广州长隆欢乐世界门票   当天可买／广州长隆旅游度假区／快速出票快捷入园／收藏店铺送卷送攻略／广东番禺汉溪长隆/长隆成人票／情侣票／家庭票／双人票／儿童票">
+                                广州长隆欢乐世界门票 当天可买／广州长隆旅...
+                            </div>
+                            <span class="price">¥187</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" target="_blank">
+                                <span class="image"><img
+                                        src="/images/default/wKgED1wdwVmAVaZUADon6OL7_xw084.gif"></span>
+                            <div class="title" title="当天可订/广州长隆野生动物世界门票/长隆野生动物园/广州长隆旅游度假区/含缆车小火车/南北门均可取票（提前1天规则退）">
+                                当天可订/广州长隆野生动物世界门票/长隆野生...
+                            </div>
+                            <span class="price">¥256</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" target="_blank">
+                                <span class="image"><img
+                                        src="/images/default/wKgBEFrEdj-Ac-nXAAOvgGsSLJI85.jpeg"></span>
+                            <div class="title" title="广州长隆水上乐园门票 一票通玩（电子票／当地必玩／免预约／超级大喇叭/热浪谷/意想不到的水上乐园）">广州长隆水上乐园门票
+                                一票通玩（电子票／当地...
+                            </div>
+                            <span class="price">¥122</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" target="_blank">
+                                <span class="image"><img
+                                        src="/images/default/wKgED1wk2LeAC2NJAAJQtab6Yqw67.jpeg"></span>
+                            <div class="title" title="寻味广州1日游（6人小团·探黄埔军校陈家祠·电车看广州塔+沙面·西关美食秘籍·本地人带玩）">
+                                寻味广州1日游（6人小团·探黄埔军校陈家祠·...
+                            </div>
+                            <span class="price">¥288</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/strategy/detail.js"></script>
+</html>

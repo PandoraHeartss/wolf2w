@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelnotes.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/system/travelnotes.js"></script>
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script src="/js/vue/md5.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+</head>
+
+
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "travel";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="wrapper" style="padding-top: 10px" id="app">
+    <div class="p-content">
+        <div class="m-post">
+            <form id="travelForm">
+                <div class="post-tab clearfix">
+                    <input type="hidden" name="orderBy" id="orderType" value="1">
+                    <div class="tab-item on"><a href="javascript:;" class="orderBy"
+                                                @click="orderChange('create_time',$event)" style="margin-right: 20px;">最新游记</a>
+                    </div>
+                    <div class="tab-item "><a href="javascript:;" class="orderBy"
+                                              @click="orderChange('viewnum',$event)">最热游记</a></div>
+                </div>
+                <div class="navbar-sub clearfix" @change="conditionChange">
+                    出发时间：
+                    <select class="com-opt" name="travelTimeType" @change="conditionChange">
+                        <option value="-1">不限</option>
+                        <option value="1">1-2月</option>
+                        <option value="2">3-4月</option>
+                        <option value="3">5-6月</option>
+                        <option value="4">7-8月</option>
+                        <option value="5">9-10月</option>
+                        <option value="6">11-12月</option>
+                    </select>
+
+                    人均花费：
+                    <select class="com-opt" name="consumeType" @change="conditionChange">
+                        <option value="-1">不限</option>
+                        <option value="1">1-999</option>
+                        <option value="2">1K-6K</option>
+                        <option value="3">6K-20K</option>
+                        <option value="4">20K以上</option>
+                    </select>
+
+                    出行天数：
+                    <select class="com-opt" name="dayType" @change="conditionChange">
+                        <option value="-1">不限</option>
+                        <option value="1">3天以下</option>
+                        <option value="2">4-7天</option>
+                        <option value="3">8-14天</option>
+                        <option value="4">15天以上</option>
+                    </select>
+                    <div class="tn-write"><a class="btn-add" target="_blank" href="/views/travel/input.html"><i></i>写游记</a>
+                    </div>
+                </div>
+            </form>
+            <div class="_notelist">
+                <div class="post-list">
+                    <ul>
+                        <li class="post-item clearfix" v-for="t in page.records">
+                            <div class="post-cover">
+                                <a :href="'/views/travel/detail.html?id='+t.id+'&destId=' + t.destId" target="_blank">
+                                    <img class="lazy" width="215" height="135" :src="t.coverUrl"
+                                         style="display: inline;"></a>
+
+                            </div>
+                            <div class="post-ding"><span id="topvote11710590">{{t.thumbsupnum}}</span><a
+                                    class="btn-ding" href="javascript:;" data-japp="articleding" data-iid="11710590"
+                                    data-vote="2067">顶</a></div>
+                            <h2 class="post-title yahei hasxjicon">
+
+                                <a :href="'/views/travel/detail.html?id='+t.id+'&destId=' + t.destId" class="title-link"
+                                   target="_blank">·{{t.title}}</a>
+                            </h2>
+                            <div class="post-author">
+                                <span class="author">
+                                    <a href="javascript:;" target="_blank" rel="nofollow"><img class="lazy"
+                                                                                               :src="t.author.headImgUrl"
+                                                                                               style="display: inline;"
+                                                                                               width="15px"></a>
+                                    作者：<a href="javascript:;" target="_blank" rel="nofollow">{{t.author.nickname}}</a>
+                                </span>
+                            </div>
+                            <div class="post-content">
+                                {{t.summary}}
+                            </div>
+                            <span class="status"><i class="icon_view"></i>{{t.viewnum}}<i
+                                    class="icon_comment"></i>{{t.replynum}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--分页-->
+                <div style="float: right">
+                    <div style="float: left;"><span style="line-height:30px"> 共{{page.pages}}页 / {{page.total}}条&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                    <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-aside">
+        <div class="p-top1 clearfix">
+            <div class="hd">
+                <h2><i></i>旅游攻略</h2>
+            </div>
+            <ol>
+                <li class="top3">
+                    <em class="rank-num">1</em>
+                    <strong>
+                        <a href="javascript:;" target="_blank">北海道</a>
+                    </strong>
+                    <a href="javascript:;" target="_blank">在皑皑白雪中泡温泉</a>
+                </li>
+                <li class="top3">
+                    <em class="rank-num">2</em>
+                    <strong>
+                        <a href="javascript:;" target="_blank">北海道</a>
+                    </strong>
+                    <a href="javascript:;" target="_blank">在皑皑白雪中泡温泉</a>
+                </li>
+                <li class="top3">
+                    <em class="rank-num">3</em>
+                    <strong>
+                        <a href="javascript:;" target="_blank">北海道</a>
+                    </strong>
+                    <a href="javascript:;" target="_blank">在皑皑白雪中泡温泉</a>
+                </li>
+                <li>
+                    <em class="rank-num">4</em>
+                    <strong>
+                        <a href="javascript:;" target="_blank">北海道</a>
+                    </strong>
+                    <a href="javascript:;" target="_blank">在皑皑白雪中泡温泉</a>
+                </li>
+                <li>
+                    <em class="rank-num">5</em>
+                    <strong>
+                        <a href="javascript:;" target="_blank">北海道</a>
+                    </strong>
+                    <a href="javascript:;" target="_blank">在皑皑白雪中泡温泉</a>
+                </li>
+            </ol>
+        </div>
+        <div class="m-box m-comm">
+            <div class="hd">
+                <h2><i></i>最新游记动态</h2>
+            </div>
+            <div class="bd">
+                <ul id="_j_new_action_list" style="height: auto; overflow:hidden">
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/travel/index.js"></script>
+</html>

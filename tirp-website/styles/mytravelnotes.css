@@ -1,0 +1,794 @@
+body {
+    font-family: Arial, verdana, "Lucida Grande", "Microsoft Yahei", "Hiragino Sans GB", "Hiragino Sans GB W3", SimSun, STHeiti;
+    background-color: #efefef;
+    color: #666;
+    overflow-x: hidden;
+    min-width: 980px;
+}
+
+a {
+    color: #ff9d00;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+.topBar {
+    height: 46px;
+    width: 100%;
+    background-color: rgba(34, 35, 36, 0.95);
+    /* background-color: #2d2e2f\9; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    font-family: "Microsoft Yahei";
+}
+
+.topBarC {
+    width: 1000px;
+    margin: 0 auto;
+    height: 46px;
+}
+
+.topBarC .logo {
+    position: relative;
+}
+
+.topBarC .logo {
+    float: left;
+    width: 32px;
+    display: inline;
+    margin: 9px 20px 0 0;
+}
+
+.topBarC .logo a {
+    display: inline-block;
+    height: 29px;
+    width: 32px;
+    background: url(../images/logo.png) 0 0 no-repeat;
+    text-indent: -9999px;
+    *text-indent: 0;
+    *line-height: 200px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.t_nav {
+    float: left;
+}
+
+.t_nav li {
+    float: left;
+    height: 46px;
+    margin-right: 1px;
+    position: relative;
+    z-index: 1;
+    zoom: 1;
+}
+
+.t_nav li .t {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+}
+
+.t_nav li .t a,
+.user_info .infoItem,
+.t_info .newmsg a {
+    float: left;
+    display: block;
+    height: 16px;
+    padding: 15px 17px;
+    color: #fff;
+    line-height: 16px;
+    line-height: 19px \9;
+    overflow: hidden;
+}
+
+.t_nav li .t a:hover,
+.user_info .infoItem:hover,
+.t_nav li:hover .t a,
+.t_nav li.hover .t a,
+.user_info .account:hover .infoItem,
+.user_info .account.hover .infoItem,
+.user_info .msg:hover .infoItem {
+    background-color: #000;
+}
+
+.t_search {
+    float: left;
+    margin: 10px 0 0 5px;
+    width: 150px;
+    height: 26px;
+    background-color: #4a4b4c;
+    overflow: hidden;
+    position: relative;
+}
+
+.t_search .key {
+    float: left;
+    width: 112px;
+    height: 26px;
+    margin: 0;
+    padding: 0 30px 0 8px;
+    border: 0 none;
+    background: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.t_search .btn {
+    position: absolute;
+    right: 9px;
+    top: 5px;
+    border: 0 none;
+    width: 16px;
+    height: 16px;
+    background: url(../images/topbar-bg.png) 0 -34px;
+    _background: url(../images/topBar-bg_ie6.gif) 0 -34px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.t_info {
+    float: right;
+    color: #fff;
+    vertical-align: top;
+}
+
+.t_info a {
+    color: #fff;
+}
+
+.t_info .user_info {
+    height: 46px;
+    float: right;
+}
+
+.t_info .user_info li {
+    float: left;
+    margin-left: 1px;
+    font-size: 12px;
+}
+
+.t_info .user_info li.daka {
+    position: relative;
+    margin-top: 11px;
+    margin-right: 15px;
+    width: 60px;
+}
+
+.t_info .msg {
+    position: relative;
+}
+
+.t_info .user_info .ub-new-msg {
+    margin: 0;
+    width: 0;
+    height: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.t_info .account {
+    position: relative;
+    z-index: 10;
+}
+
+.daka_btn {
+    display: block;
+    width: 100%;
+}
+
+.daka_btn a {
+    width: 100%;
+    height: 24px;
+    background-color: #1493e3;
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.daka_btn .daka_after,
+.daka_complete .daka_before {
+    display: none;
+}
+
+.t_info .msg span {
+    display: inline-block;
+}
+
+.t_info .msg a {
+    padding-right: 20px;
+}
+
+.t_info .user_info .drop-bd {
+    position: absolute;
+    right: 0;
+    width: 130px;
+    top: 46px;
+    background-color: #222;
+    opacity: .9;
+    filter: alpha(opacity=90);
+    padding-bottom: 5px;
+    display: none;
+    z-index: 97;
+}
+
+.t_info .user_info .infoItem {
+    padding-left: 12px;
+    padding-right: 25px;
+    font-size: 16px;
+}
+
+.topBarC .t b,
+.user_info .infoItem b {
+    position: absolute;
+    right: 12px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-width: 4px;
+    border-style: solid dashed dashed dashed;
+    border-color: #999 transparent transparent transparent;
+}
+
+.t_nav li.drop .t a {
+    padding-right: 25px;
+}
+
+.t_info .user_info .drop-bd li {
+    height: 29px;
+    float: none;
+    margin: 0;
+    display: block;
+}
+
+.t_info .user_info .drop-bd li a {
+    padding: 0 10px;
+    height: 29px;
+    line-height: 29px;
+    display: block;
+    color: #fff;
+    opacity: .9;
+}
+
+.t_info .user_info .drop-bd li a:hover {
+    background-color: #000;
+    text-decoration: none;
+}
+
+.topBar .uSet {
+    position: absolute;
+    right: 0;
+    top: 46px;
+    width: 170px;
+    background-color: #222;
+    background-color: rgba(34, 34, 34, .95);
+    padding: 0 0 10px;
+    display: none;
+}
+
+.t_info .account .t a {
+    padding-right: 25px;
+    padding: 7px 22px 7px 10px;
+    height: auto;
+}
+
+.t_info .account .t a img {
+    float: left;
+    margin: 0;
+    border-radius: 32px;
+}
+
+.t_info .account .t a b {
+    right: 9px;
+}
+
+.topBar .uSet .asset {
+    margin-bottom: 5px;
+    padding-left: 10px;
+    line-height: 30px;
+    background-color: #ff9d00;
+    color: #fff;
+}
+
+.topBar .uSet a {
+    display: block;
+    text-align: left;
+    padding: 7px 10px;
+    height: 15px;
+    color: #FFF;
+}
+
+.topBar .uSet .tb-level {
+    margin-left: 10px;
+    color: #ef523d;
+}
+
+.banner {
+    position: relative;
+}
+
+.tags_bar {
+    margin-top: 46px;
+    height: 58px;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: #d6d6d6 1px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.center {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.banner .center {
+    height: 480px;
+}
+
+.flt1 {
+    float: left;
+}
+
+.flt2 {
+    float: right;
+}
+
+.tags_bar ul {
+    float: right;
+}
+
+.tags_bar li {
+    float: left;
+    position: relative;
+    z-index: 10;
+}
+
+.tags_bar li .tags_link {
+    display: block;
+    margin-left: 12px;
+    margin-top: 10px;
+    padding: 0 15px;
+    position: relative;
+    font-size: 18px;
+    height: 48px;
+    line-height: 38px;
+    color: #444;
+    border-radius: 5px 5px 0 0;
+    z-index: 1;
+}
+
+.tags_bar li .tags_link:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #ff8a00;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+}
+
+.tags_bar li.on .tags_link:after {
+    display: block;
+}
+
+.tags_bar li .tags_link:hover {
+    color: #ff8a00;
+}
+
+.side_bar {
+    width: 280px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-top-style: none;
+    z-index: 10;
+    padding-bottom: 55px;
+}
+
+.banner_img {
+    text-align: center;
+    background-color: #006488;
+    height: 260px;
+    background-position: center 0;
+    background-repeat: no-repeat;
+}
+
+.banner_note {
+    background-image: url(../images/banner_note.gif);
+}
+
+.MAvatar {
+    text-align: center;
+    font-size: 14px;
+}
+
+.tags_bar {
+    height: 58px;
+    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: #d6d6d6 1px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.second_tags_bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 58px;
+}
+
+.second_tags_bar .MAvatar {
+    position: absolute;
+    left: 30px;
+    top: -30px;
+}
+
+.banner .second_tags_bar .center {
+    height: auto;
+}
+
+.MAvaImg {
+    width: 120px;
+    height: 70px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.second_tags_bar .MAvatar .MAvaImg {
+    margin-right: 10px;
+}
+
+.second_tags_bar .MAvatar .MAvaEasyWord {
+    margin-top: -7px;
+}
+
+.MAvaImg img {
+    position: relative;
+    top: -50px;
+    z-index: 20;
+    border-radius: 120px;
+}
+
+.MAvaName {
+    font-size: 22px;
+    line-height: 24px;
+    margin-top: 16px;
+}
+
+.second_tags_bar .MAvatar .MAvaName {
+    color: #fff;
+    font-size: 16px;
+}
+
+.second_tags_bar .MAvatar .MAvaLevel {
+    font-size: 16px;
+    color: #ea3c1a;
+}
+
+.center {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.note_side {
+    margin-top: 18px;
+    border-top: #e2e2e2 1px solid;
+}
+
+.side_bar {
+    width: 280px;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-top-style: none;
+    z-index: 10;
+    padding-bottom: 55px;
+}
+
+.MUsers {
+    padding: 45px 30px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.note_side .MUsers {
+    padding-top: 35px;
+}
+
+.MUsersTitle {
+    font-size: 16px;
+    color: #444;
+}
+
+.note_side .MUsersDetail {
+    margin-top: 28px;
+}
+
+.MUsersBehavior {
+    margin-top: 20px;
+    padding-bottom: 6px;
+    color: #999;
+    border-bottom: #e5e5e5 1px solid;
+}
+
+.MUsersDetail .MUsersAtom {
+    width: 1000px;
+    overflow: hidden;
+    *zoom: 1;
+}
+
+.MUsersDetail ul {
+    width: 240px;
+    float: left;
+}
+
+.clearfix:after,
+.wrapper:after,
+.article:after {
+    content: '\20';
+    clear: both;
+    display: block;
+}
+
+.MUsersBehavior span {
+    margin: 0 10px;
+}
+
+.MUsersBehavior span i {
+    color: #ff8a00;
+}
+
+.content {
+    width: 682px;
+    margin-top: 18px;
+}
+
+.my_notes {
+    padding-bottom: 30px;
+}
+
+.common_block {
+    margin-bottom: 18px;
+    background-color: #ffffff;
+    border: #e2e2e2 1px solid;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.common_title {
+    padding: 25px 30px;
+    line-height: 30px;
+    position: relative;
+}
+
+.m-pagination {
+    padding: 20px 5px;
+    line-height: 24px;
+    text-align: right;
+    font-size: 12px;
+    color: #999;
+}
+
+.m-pagination {
+    padding: 35px 25px 0;
+}
+
+.m-pagination .pg-first,
+.m-pagination .pg-prev,
+.m-pagination .pg-next,
+.m-pagination .pg-last,
+.m-pagination .pg-current {
+    display: inline-block;
+    margin-right: 5px;
+    background-color: #ff9d00;
+    padding: 0 5px;
+    border-radius: 4px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.m-pagination .pg-current {
+    padding: 0 7px;
+}
+
+.common_title .MAvaMore {
+    width: 432px;
+    margin: 0 auto;
+    border: none;
+}
+
+.common_title .MAvaMore {
+    width: 432px;
+    margin: 0 auto;
+    border: none;
+}
+
+.MAvaMore .MAvaNums {
+    position: relative;
+    width: 33%;
+    float: left;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 20px;
+}
+
+.common_title .MAvaMore .MAvaNums {
+    padding: 5px 0 0;
+    line-height: 26px;
+    width: 33%;
+}
+
+.MAvaMore .MAvaNums strong {
+    font-size: 20px;
+    color: #444;
+    font-family: Arial;
+}
+
+.MAvaMore .MAvaNums p {
+    font-size: 14px;
+}
+
+.common_title .MAvaMore p {
+    color: #999;
+}
+
+.MAvaMore .MAvaNums:after {
+    content: '';
+    width: 1px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #e2e2e2;
+}
+
+.notes_list {
+    position: relative;
+}
+
+.notes_list {
+    overflow: hidden;
+    *zoom: 1;
+    transition: height 0.5s ease-out 0s;
+    -webkit-transition: height 0.5s ease-out 0s;
+}
+
+.notes_list li {
+    transition: 0.5s ease-out 0s;
+    -webkit-transition: 0.5s ease-out 0s;
+    overflow: hidden;
+}
+
+.notes_list dl {
+    padding-bottom: 40px;
+}
+
+.notes_list dt {
+    position: relative;
+}
+
+.notes_list dd {
+    padding: 20px 30px 0;
+}
+
+.notes_list dt .thumb_description {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.notes_list dt .thumb_description strong {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.MDing {
+    float: right;
+}
+
+.note_info {
+    width: 502px;
+    float: left;
+}
+
+.MDing span {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff9d00;
+    font-weight: normal;
+}
+
+.MDing span,
+.MDing a {
+    vertical-align: middle;
+    line-height: 33px;
+}
+
+.MDing a {
+    width: 37px;
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -90px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(228, 128, 11, 0.71);
+}
+
+.note_info h3 a {
+    line-height: 24px;
+    color: #ff8a00;
+    font-size: 18px;
+}
+
+.note_more {
+    margin-top: 10px;
+    color: #999;
+}
+
+.note_more span {
+    font-family: Arial;
+    margin-right: 6px;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.note_more .time {
+    margin-right: 15px;
+    position: relative;
+    top: 1px;
+    margin-left: 5px;
+}
+
+.MInfoNum i,
+.MInfoNum em {
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.MInfoNum i {
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -124px;
+    width: 18px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.MInfoNum em {
+    font-style: normal;
+}
+
+.MInfoNum .MIcoStar {
+    background-position: -42px -124px;
+}
+
+.note_word {
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 24px;
+}
+
+.MAvaMore .last:after {
+    display: none;
+}

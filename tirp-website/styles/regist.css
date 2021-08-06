@@ -1,0 +1,420 @@
+a {
+    color: #ffa800;
+    text-decoration: none;
+}
+
+.clear {
+    clear: both;
+    display: block;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.fullscreen-bg {
+    background-position: 50% 50%;
+    background-size: cover;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    position: absolute \9;
+    width: 100% \9;
+    height: 100% \9;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+}
+
+.fullscreen-bg:before {
+    background: url(../images/full_page_vignette.png) 0 0 rgba(0, 0, 0, 0.2);
+    background-size: 100%;
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: .5;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.fullscreen-bg:after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.fullscreen-bg img {
+    display: none;
+    display: block \9;
+    -ms-interpolation-mode: bicubic;
+    filter: progid:DXImageTransform.Microsoft.Fade(duration=0.3);
+    height: auto;
+    margin: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+.wrapper {
+    width: 980px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -245px 0 0 -490px;
+    z-index: 2;
+    color: #666;
+}
+
+.container {
+    width: 370px;
+    margin: -30px auto 0;
+}
+
+.container-login {
+    width: 600px;
+    margin: -30px auto 0;
+}
+
+.container a.logo {
+    width: 136px;
+    height: 69px;
+    display: block;
+    text-indent: -999px;
+    overflow: hidden;
+    background: url(../images/mfw-logo-white4.png) no-repeat;
+    margin: 0 auto;
+}
+
+.signup-forms {
+    position: relative;
+}
+
+.signup-forms.flip .login-box {
+    z-index: 10;
+    display: block;
+}
+
+.signup-forms .login-box {
+    position: absolute;
+    z-index: 8;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+
+.signup-forms .inner {
+    width: 370px;
+    padding-top: 26px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .4);
+}
+
+.signup-forms .inner_v2 {
+    width: 600px;
+}
+
+.bottom-link {
+    width: 140px;
+    margin: 10px auto;
+    background-color: #000;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, .4);
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    padding: 4px 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+}
+
+.bottom-link a {
+    color: #ffa800;
+    margin-left: 6px;
+}
+
+.signup-forms .inner_v2 .inner_v2_left {
+    float: left;
+    width: 370px;
+}
+
+.signup-forms .inner_v2 .inner_v2_right {
+    float: right;
+    border-left: 1px solid #ebebeb;
+    width: 208px;
+    padding-left: 20px;
+    height: 300px;
+    padding-top: 20px;
+}
+
+.signup-forms .connect {
+    clear: both;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.signup-forms .connect .hd {
+    padding: 15px 0 20px 24px;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #ebebeb;
+}
+
+.signup-forms .connect .bd {
+    padding: 0 0 0 25px;
+    width: 348px;
+    height: 84px;
+    overflow: hidden;
+}
+
+.signup-forms .connect a {
+    width: 58px;
+    height: 84px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.signup-forms .connect a i {
+    width: 42px;
+    height: 42px;
+    background: url(../images/c_icon3.gif) no-repeat;
+    display: block;
+    margin: 0 0 4px 10px;
+    cursor: pointer;
+}
+
+.signup-forms .connect a.weibo i {
+    background-position: 0 0;
+}
+
+.signup-forms .connect a.qq i {
+    background-position: -42px 0;
+}
+
+.signup-forms .connect a.weixin i {
+    background-position: -294px 0;
+}
+
+.signup-forms .form-field {
+    clear: both;
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 10px;
+    zoom: 1 \9;
+}
+
+.signup-forms .form-link {
+    clear: both;
+    width: 320px;
+    margin: 0 auto;
+    padding: 8px 0 0;
+    text-align: right;
+}
+
+.signup-forms .submit-btn {
+    width: 320px;
+    margin: 0 auto;
+    padding: 12px 0 0;
+}
+
+.signup-forms .form-field input {
+    width: 306px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding: 6px 0 6px 12px;
+    box-shadow: 0 0 5px #fff;
+    outline: 0;
+    transition: box-shadow .25s linear 0s;
+    -webkit-transition: box-shadow .25s linear 0s;
+}
+
+.signup-forms .err-tip {
+    clear: both;
+    background: url(../images/err_ico2.png) 0 -60px no-repeat #fff;
+    padding: 0 0 3px 22px;
+    width: 300px;
+    font-size: 12px;
+    color: #ff3c00;
+    margin-top: 10px;
+    top: 0;
+    position: absolute;
+    text-align: left;
+    display: none;
+}
+
+.signup-forms .form-link a {
+    color: #ffa800;
+}
+
+.signup-forms .submit-btn button {
+    width: 320px;
+    height: 42px;
+    border: 0;
+    background-color: #ffa800;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup-forms .inner_v2 .inner_v2_right img {
+    width: 180px;
+    height: 180px;
+}
+
+.signup-forms .inner_v2 .inner_v2_right p {
+    font-size: 15px;
+    color: #797979;
+    line-height: 24px;
+    margin-top: 20px;
+    text-align: center;
+    width: 180px;
+}
+
+.signup-forms .agreement {
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 12px;
+    font-size: 12px;
+    color: #ccc;
+    text-align: right;
+    line-height: 1em;
+}
+
+.signup-forms .agreement a {
+    color: #999;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.signup-forms .signup-box {
+    display: block;
+}
+
+.add-info {
+    margin: 0 auto;
+    text-align: center;
+    width: 370px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-bottom: 20px;
+}
+
+.add-info .hd {
+    height: 56px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #d8d8d8;
+    line-height: 56px;
+    font-size: 18px;
+    color: #666;
+    padding: 0 26px;
+    border-radius: 5px 5px 0 0;
+    text-align: left;
+}
+
+#_j_signup_mobile_form, #_j_complete_form {
+    padding-top: 15px;
+    position: relative;
+}
+
+input {
+    outline: 0;
+}
+
+.signup-forms .form-field {
+    clear: both;
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 10px;
+    zoom: 1 \9;
+}
+
+.add-info .m-t-10 {
+    margin-top: 10px;
+}
+
+.signup-forms .form-field input {
+    width: 306px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding: 6px 0 6px 12px;
+    box-shadow: 0 0 5px #fff;
+    outline: 0;
+    transition: box-shadow .25s linear 0s;
+    -webkit-transition: box-shadow .25s linear 0s;
+}
+
+.signup-forms .vcode-send {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    background: #f2f2f2;
+    background: -moz-linear-gradient(top, #fff, #f2f2f2);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f2f2f2));
+    color: #333;
+    vertical-align: top;
+    float: left;
+    overflow: hidden;
+}
+
+.signup-forms .form-field input {
+    width: 306px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    line-height: 28px;
+    padding: 6px 0 6px 12px;
+    box-shadow: 0 0 5px #fff;
+    outline: 0;
+    transition: box-shadow .25s linear 0s;
+    -webkit-transition: box-shadow .25s linear 0s;
+}
+
+.signup-forms .form-field input.vcode-input {
+    width: 174px;
+    float: right;
+}
+
+.signup-forms .submit-btn button {
+    width: 320px;
+    height: 42px;
+    border: 0;
+    background-color: #ffa800;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup-forms .vcode-send.disabled {
+    background: #f2f2f2;
+    cursor: default;
+    color: #b3b3b3;
+}

@@ -13,4 +13,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface IUserInfoService extends IService<UserInfo> {
 
+    /*
+     * @Description: 查询输入的手机号是否已被注册
+     * @param: phone
+     * @return true为查找到该手机号 false为查找不到该手机号
+     * @author PandoraHearts
+     * @date 2021/8/6 16:31
+     */
+    Boolean checkPhone(String phone);
 }

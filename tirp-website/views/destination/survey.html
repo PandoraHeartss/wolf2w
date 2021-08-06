@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelspot.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelwiki.css" rel=" stylesheet " type="text/css ">
+    <script type="text/javascript " src="/js/jquery/jquery.js "></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <script src="/js/system/destination/survey.js"></script>
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "destination";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="wrapper" id="app" v-cloak>
+    <div class="crumb">
+        <div class="item"><a href="/destination">目的地</a><em>&gt;</em></div>
+        <div class="item" v-for="t in toasts"><a :href="'/views/destination/detail.html?id='+t.id">{{t.name}}</a><em>&gt;</em>
+        </div>
+        <div class="item cur"><strong>{{dest.name}}概况</strong></div>
+    </div>
+    <div id="catalogContent">
+
+        <div class="container">
+            <div class="wrapper wiki-wrapper clearfix">
+                <div class="wiki-aside">
+                    <ul class="wiki-nav">
+                        <li v-for="c in catalogs" :class="{'on':c.id==catalog.id}">
+                            <a :href="'/views/destination/survey.html?destId='+dest.id+'&catalogId=' + c.id"
+                               class="catalog">{{c.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="wiki-cont">
+                    <div class="wiki-title clearfix">
+                        <h1 class="h1">{{catalog.name}}</h1>
+                    </div>
+                    <div>
+                        <a v-for="d in catalog.strategies" :href="'/views/strategy/detail.html?id='+d.id">{{d.title}}
+                            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a>
+                    </div>
+                    <Br>
+                    <div><h2>{{strategy.title}}</h2></div>
+                    <div class="wiki-cont" v-html="content">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/destination/survey.js"></script>
+</html>

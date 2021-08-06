@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/login.css" rel="stylesheet" type="text/css">
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/vue/common.js"></script>
+    <script src="/js/plugins/jquery-form/jquery.form.js"></script>
+
+</head>
+
+<script>
+    $(function () {
+        $("#_js_loginBtn").click(function () {
+            $("#_j_login_form").ajaxSubmit({
+                url: domainUrl + "/users/login",
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                    /**
+                     * JsonReslut   --- data
+                     *
+                     * {
+                     *    code:200,
+                     *    msg:xxx,
+                     *    data:{
+                     *        token:xx
+                     *        user:{...}
+                     *    }
+                     * }
+                     *
+                     */
+                    if (data.code == 200) {
+                        var map = data.data;
+                        var token = map.token;  //后续后端获取当前登录用户信息
+                        var user = map.user;  //前端页面需要显示用户信息
+                        //sessionStorage  客户端技术可以在浏览器窗口存储数据, 一但关闭窗口,
+                        // 数据就没了, 是如果多个窗口, 数据无法共享
+
+                        //localStorage  客户端技术可以在浏览器窗口存储数据, 数据操作是永久
+
+                        //cookie 客户端技术可以在浏览器窗口存储数据, 特点有时效性
+
+                        //参数1:cookie的key值, 参数2: cookie的value值, 参数3: 有效时间, 单位天
+                        Cookies.set('user', JSON.stringify(user), {expires: 1 / 48, path: '/'});
+                        Cookies.set('token', token, {expires: 1 / 48, path: '/'});
+
+                        //document.referrer 上一个请求路径
+                        var url = document.referrer ? document.referrer : "/";
+
+                        if (url.indexOf("regist.html") > -1 || url.indexOf("login.html") > -1) {
+                            url = "/";
+                        }
+                        window.location.href = url
+                    } else {
+                        popup(data.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+<body>
+<div class="wrapper">
+    <div class="container container-login">
+        <a href="javascript:;" title="返回首页" class="logo">骡窝窝</a>
+        <div class="signup-forms flip">
+            <div class="login-box" id="_j_login_box">
+                <div class="inner inner_v2 clearfix">
+                    <div class="inner_v2_left">
+                        <form id="_j_login_form" method="post">
+                            <div class="form-field">
+                                <input name="username" type="text" placeholder="您的手机号" autocomplete="off"
+                                       data-verification-name="帐号" value="13700000000">
+                                <div class="err-tip"></div>
+                            </div>
+                            <div class="form-field">
+                                <input name="password" type="password" placeholder="您的密码" autocomplete="off"
+                                       data-verification-name="密码"
+                                       class="verification[required,minSize[4],maxSize[50]]" value="1111">
+                                <div class="err-tip"></div>
+                            </div>
+                            <div class="form-link"><a href="javascript:;">忘记密码</a></div>
+                            <div class="submit-btn">
+                                <button id="_js_loginBtn" type="button">登 录</button>
+                            </div>
+                        </form>
+                        <div class="connect">
+                            <p class="hd">用合作网站账户直接登录</p>
+                            <div class="bd">
+                                <a href="javascript:;" class="weibo"><i></i>新浪微博</a>
+                                <a href="javascript:;" class="qq"><i></i>QQ</a>
+                                <a href="javascript:;" class="weixin"><i></i>微信</a>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inner_v2_right">
+                        <img src="/images/qrcode.jpg">
+                        <p>扫一扫<br>下载骡窝窝APP</p>
+                    </div>
+                </div>
+                <div class="bottom-link">
+                    还没有帐号?<a href="/regist.html">马上注册</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="fullscreen-bg"
+     style="background-image: url(images/34.jpg);">
+    <img src="images/34.jpg" style="width: auto; height: 657px; margin-top: -213px;">
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelguide.css" rel="stylesheet" type="text/css">
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/system/travelguide.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+</head>
+
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "strategy";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="container" v-cloak id="app">
+    <div>
+        <div class="crumb">
+            <div class="item"><a href="/destination">目的地</a><em>&gt;</em></div>
+            <div class="item" v-for="t in toasts"><a
+                    :href="'/views/destination/detail.html?id='+t.id">{{t.name}}</a><em>&gt;</em></div>
+        </div>
+    </div>
+    <div class="main clearfix">
+        <div class="content">
+            <div class="filter">
+                <div class="filter-wrapper clearfix">
+                    <ul class="filter-tag">
+                        <li class="on _j_tag" @click="themeSelect('', $event)"><a href="javascript:;">全部</a></li>
+                        <li v-for="t in themes" class="_j_tag" :data-tid="t.id" @click="themeSelect(t.id,$event)"><a
+                                href="javascript:;">{{t.name}}</a></li>
+                    </ul>
+                    <a class="trigger _j_trigger_btn" href="javascript:void(0);">更多</a></div>
+            </div>
+            <div class="guide-list">
+
+                <div class="item clearfix" v-for="d in page.records">
+                    <a :href="'/views/strategy/detail.html?id='+d.id" target="_blank" class="_j_item">
+                        <div class="img"><img :src="d.coverUrl"></div>
+                        <div class="detail">
+                            <h3>{{d.title}}</h3>
+                            <ul>
+                                {{d.summary}}
+                            </ul>
+                            <div class="extra">
+                                <span class="location"><i></i>{{d.destName}}</span>
+                                <span class="view"><i></i>{{d.viewnum}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!--分页-->
+                <div style="float: right">
+                    <div style="float: left;"><span style="line-height:30px"> 共{{page.pages}}页 / {{page.total}}条&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                    <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="side-sales">
+            <h3>本周热卖</h3>
+            <ul>
+                <li>
+                    <a href="javascript:;" target="_blank">
+                            <span class="image"><img
+                                    src="/images/default/wKgBEFs6E4yAPz00AAhnvJUJ1j8238.gif"></span>
+                        <div class="title"
+                             title="广州长隆野生动物世界门票    随买随用 ／广州长隆旅游度假区／一票通玩 ／ 快速出票快捷入园 ／ 含空中览车及小火车/亲子乐园/赠送电子导览／自然零距离／广州长隆野生动物园">
+                            广州长隆野生动物世界门票 随买随用 ／广州...
+                        </div>
+                        <span class="price">¥260</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_blank">
+                            <span class="image"><img
+                                    src="/images/default/wKgED1wweM2AVCMFAAzr37WPWDI967.gif"></span>
+                        <div class="title"
+                             title="广州长隆欢乐世界门票   当天可买／广州长隆旅游度假区／快速出票快捷入园／收藏店铺送卷送攻略／广东番禺汉溪长隆/长隆成人票／情侣票／家庭票／双人票／儿童票">
+                            广州长隆欢乐世界门票 当天可买／广州长隆旅...
+                        </div>
+                        <span class="price">¥187</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_blank">
+                            <span class="image"><img
+                                    src="/images/default/wKgED1wdwVmAVaZUADon6OL7_xw084.gif"></span>
+                        <div class="title" title="当天可订/广州长隆野生动物世界门票/长隆野生动物园/广州长隆旅游度假区/含缆车小火车/南北门均可取票（提前1天规则退）">
+                            当天可订/广州长隆野生动物世界门票/长隆野生...
+                        </div>
+                        <span class="price">¥256</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_blank">
+                            <span class="image"><img
+                                    src="/images/default/wKgBEFrEdj-Ac-nXAAOvgGsSLJI85.jpeg"></span>
+                        <div class="title" title="广州长隆水上乐园门票 一票通玩（电子票／当地必玩／免预约／超级大喇叭/热浪谷/意想不到的水上乐园）">广州长隆水上乐园门票
+                            一票通玩（电子票／当地...
+                        </div>
+                        <span class="price">¥122</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_blank">
+                            <span class="image"><img
+                                    src="/images/default/wKgED1wk2LeAC2NJAAJQtab6Yqw67.jpeg"></span>
+                        <div class="title" title="寻味广州1日游（6人小团·探黄埔军校陈家祠·电车看广州塔+沙面·西关美食秘籍·本地人带玩）">
+                            寻味广州1日游（6人小团·探黄埔军校陈家祠·...
+                        </div>
+                        <span class="price">¥288</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/strategy/list.js"></script>
+</html>

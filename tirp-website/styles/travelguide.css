@@ -1,0 +1,416 @@
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: #ff9d00;
+    cursor: pointer;
+}
+
+a:hover {
+    outline: 0;
+    text-decoration: underline;
+    color: #ff8a00;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.crumb {
+    margin-bottom: 20px !important;
+    height: 20px;
+    padding: 15px 0;
+    color: #666;
+    font-size: 12px;
+    line-height: 20px;
+    border-bottom: 1px solid #ededed;
+}
+
+.crumb {
+    width: 1000px;
+    font: 12px Arial, "Microsoft Yahei", "\5FAE\8F6F\96C5\9ED1", Tahoma, Helvetica, STHeiti, "Hiragino Sans GB";
+    height: 20px;
+    padding: 15px 0;
+    color: #666;
+    line-height: 20px;
+    margin: 0 auto;
+}
+
+.crumb .item {
+    float: left;
+}
+
+.crumb .item.cur {
+    color: #ff7000;
+}
+
+.crumb a {
+    color: #666;
+    font-size: 12px;
+}
+
+.crumb .item a {
+    color: #666;
+    font-size: 12px;
+}
+
+.crumb .item em {
+    margin: 0 6px;
+    color: #999;
+    font-family: 'simsun';
+    font-style: normal;
+}
+
+.crumb .drop {
+    float: left;
+}
+
+.crumb .drop .hd {
+    height: 20px;
+}
+
+.crumb .drop .hd a {
+    display: block;
+    height: 20px;
+    _float: left;
+    padding: 0 13px 0 5px;
+}
+
+.crumb .drop .bd {
+    position: absolute;
+    display: none;
+    margin: 5px 0 0 -10px;
+    _margin: 20px 0 0 -70px;
+    z-index: 20;
+    padding: 10px 0 8px 7px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.crumb .drop .hd i {
+    position: absolute;
+    margin: 8px 0 0 3px;
+    *margin: 4px 0 0 3px;
+    width: 0;
+    height: 0;
+    border-top: 3px solid #ff7000;
+    border-left: 3px dashed transparent;
+    border-right: 3px dashed transparent;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.crumb .drop.open .hd a {
+    background-color: #ff7000;
+    color: #fff;
+}
+
+.crumb .drop.open .hd i {
+    border-top-color: #fff;
+}
+
+.crumb .drop.open .bd {
+    display: block;
+}
+
+.crumb .drop .bd .arrow {
+    position: absolute;
+    left: 20px;
+    top: -6px;
+    width: 0;
+    height: 0;
+    border-bottom: 6px solid #e5e5e5;
+    border-left: 6px dashed transparent;
+    border-right: 6px dashed transparent;
+    font-size: 0;
+}
+
+.crumb .drop .bd .arrow b {
+    position: absolute;
+    left: -6px;
+    top: 2px;
+    width: 0;
+    height: 0;
+    border-bottom: 6px solid #fff;
+    border-left: 6px dashed transparent;
+    border-right: 9px dashed transparent;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.crumb .drop .col {
+    float: left;
+    width: 145px;
+}
+
+.crumb .drop .more {
+    clear: both;
+    padding: 10px 20px 0 0;
+    text-align: right;
+}
+
+.crumb .drop h3 {
+    padding-left: 7px;
+    color: #333;
+}
+
+.crumb .drop li {
+    float: left;
+    display: inline;
+    width: 137px;
+    margin: 4px 8px 0 0;
+    height: 21px;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.crumb .drop li a {
+    display: block;
+    height: 21px;
+    padding: 0 7px;
+    color: #333;
+}
+
+.crumb .drop .more a {
+    color: #ff7000;
+}
+
+.content {
+    float: left;
+    width: 680px;
+}
+
+.filter {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.filter-wrapper {
+    position: relative;
+    width: 680px;
+}
+
+.filter-tag {
+    float: left;
+    width: 610px;
+    text-align: center;
+    height: 32px;
+    overflow: hidden;
+}
+
+.filter-tag.extend {
+    height: auto;
+}
+
+.filter .trigger {
+    color: #ff9d00;
+    line-height: 22px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.filter-tag li {
+    float: left;
+    width: 89px;
+    margin: 0 10px 10px 0;
+    display: inline;
+}
+
+.filter-tag li a {
+    display: block;
+    height: 20px;
+    border: 1px solid #e5e5e5;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    color: #666;
+    line-height: 20px;
+}
+
+.content .guide-list {
+    float: none;
+    width: auto;
+}
+
+.guide-list .item {
+    margin-bottom: 35px;
+}
+
+.guide-list .item a {
+    display: block;
+}
+
+.guide-list .img {
+    float: left;
+    display: inline;
+    margin-right: 15px;
+    width: 220px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-list .detail {
+    margin-left: 235px;
+    height: 150px;
+    position: relative;
+}
+
+.guide-list .img span {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    background-color: #ff6262;
+    line-height: 25px;
+    padding: 0 5px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 0 2px 2px 0;
+}
+
+.guide-list h3 {
+    position: relative;
+    top: -3px;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #333;
+    line-height: 24px;
+    font-weight: normal;
+}
+
+.guide-list a:hover h3 {
+    color: #ff9d00;
+}
+
+.guide-list ul {
+    line-height: 22px;
+    font-size: 14px;
+    color: #666;
+}
+
+.guide-list li {
+    height: 22px;
+    overflow: hidden;
+}
+
+.guide-list li:before {
+    content: '';
+    float: left;
+    margin: 9px 9px 0 0;
+    width: 6px;
+    height: 6px;
+    background-color: #ff9d00;
+    border-radius: 50%;
+}
+
+.guide-list .extra {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 16px;
+}
+
+.guide-list .extra span {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.guide-list .location i,
+.guide-list .view i {
+    float: left;
+    margin-right: 5px;
+    display: inline-block;
+    width: 14px;
+    height: 16px;
+    background: url(../images/icon-guide.png) no-repeat 0 0;
+    vertical-align: middle;
+}
+
+.guide-list .view i {
+    margin-top: 1px;
+    width: 18px;
+    height: 14px;
+    background-position: -20px 0;
+}
+
+.filter-tag li a:hover,
+.filter-tag li.on a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #ffa800;
+    border-color: #ffa800;
+}
+
+.crumb .drop .hd a:hover {
+    text-decoration: none;
+}
+
+.crumb .drop li a:hover,
+.crumb .drop li.on a {
+    background-color: #fff1d7;
+    color: #ff7000;
+    text-decoration: none;
+}
+
+.guide-list .item a:hover {
+    padding: 20px;
+    margin: -20px;
+    text-decoration: none;
+    background-color: #f4f4f4;
+}
+
+.side-sales {
+    float: right;
+    width: 290px;
+}
+
+.side-sales h3 {
+    font-size: 18px;
+    margin: -3px 0 15px;
+    font-weight: normal;
+    color: #333;
+    line-height: 24px;
+}
+
+.side-sales li {
+    margin-bottom: 20px;
+}
+
+.side-sales li a {
+    display: block;
+    padding-left: 110px;
+    height: 70px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+
+.side-sales .image {
+    float: left;
+    margin-left: -110px;
+    width: 100px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.side-sales .title {
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.side-sales .price {
+    color: #ff9d00;
+}
+
+.side-sales li a:hover {
+    text-decoration: none;
+}
+
+.side-sales li a:hover .title {
+    color: #ff9d00;
+}

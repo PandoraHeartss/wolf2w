@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelspot.css" rel="stylesheet" type="text/css">
+    <link href="/styles/select.css" rel="stylesheet" type="text/css">
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "destination";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div id="app" v-cloak>
+    <div id="container">
+        <div class="pagelet-block">
+            <div class="row row-placeList">
+                <div class="wrapper">
+                    <h2 class="r-title">景点</h2>
+                    <div class="bd">
+                        <ul class="clearfix">
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB3FGMgSCAZo0qAAgGckFTqJA54.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>广州塔</strong><br><b>40576</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB3FECAVCANTk_AAWNVF8sjYw25.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>大梅沙</strong><br><b>33108</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB6lP0VpCADPDPAAPICO-I-Iw57.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>伶仃洋</strong><br><b>17660</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB4lIlVk6AIMCDAAStueA6sSU73.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>双月湾</strong><br><b>7214</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB6lRZ5s6ARJzuAAjCwdIPcK865.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>千灯湖</strong><br><b>9649</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB3FIMRvaAdrjoAAGCmIetJvQ75.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>丹霞山</strong><br><b>6248</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB4lMO9uuAbh9fAAKP4vgV8Os70.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>烟雨楼</strong><br><b>10353</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgB4lMNziCASS7YAADtzNGSAUU44.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>中山道</strong><br><b>8276</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li class="item">
+                                <div class="img">
+                                    <a :href="'detail.html?id='">
+                                        <img class="lazy" height="200" width="320"
+                                             src="/images/test/spot/wKgBEFqTegaAGG-GAAgeDCxhmAQ61.jpeg"
+                                             style="display: inline;">
+                                    </a>
+                                </div>
+                                <dl class="caption">
+                                    <dt>
+                                        <a :href="'detail.html?id='"
+                                           target="_blank"><strong>好地方</strong><br><b>8276</b>人去过</a>
+                                    </dt>
+                                    <dd>
+                                        <a href="javascript:;" target="_blank">电话：020-89338222</a>
+                                        <span class="divide"></span>
+                                        <a href="javascript:;" target="_blank">用时参考：3小时</a>
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/spot/list.js"></script>
+</html>

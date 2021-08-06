@@ -1,0 +1,16 @@
+.com-sel {
+    line-height: 5rem;
+    cursor: pointer; /*鼠标上移变成小手*/
+}
+
+.com-opt {
+    padding-right: 1.8rem;
+    border: none;
+    outline: none;
+    /*去掉默认的下拉三角
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;*/
+    /*添加下拉三角图标
+    background: url("/images/select.jpg") no-repeat right center transparent;*/
+}

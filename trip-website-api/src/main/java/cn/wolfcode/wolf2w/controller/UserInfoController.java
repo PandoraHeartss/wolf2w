@@ -17,13 +17,22 @@ public class UserInfoController {
 
 
     @GetMapping("/detail")
-    public Object detail(Long id){
+    public Object detail(Long id) {
         return userInfoService.getById(id);
     }
 
-    @GetMapping("/detail")
-    public Object detail2(Long id){
-        return userInfoService.getById(id);
+
+    /*
+     * @Description: 询输入的手机号是否已被注册
+     * @param: null
+     * @return true为查找到该手机号  false为查找不到该手机号
+     * @author PandoraHearts
+     * @date 2021/8/6 16:47
+     */
+    @GetMapping("/checkPhone")
+    public Boolean checkPhone(String phone) {
+        Boolean ret = userInfoService.checkPhone(phone);
+        return ret;
     }
 
 

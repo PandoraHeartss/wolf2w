@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>用户-搜索</title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/search.css" rel="stylesheet" type="text/css">
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/vue/moment.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+</head>
+<body>
+<div>
+    <div id="navbar">
+        <!--导航栏-->
+        <script>
+            $('#navbar').load('/views/common/navbar-search.html');
+        </script>
+    </div>
+</div>
+<div class="mfw-search-main" id="app" v-cloak>
+
+    <div class="s-nav">
+        <div class="wid">
+            <div class="nav-list clearfix">
+                <a href="javascript:;" class=" _j_search_link" @click="searchChange(-1)">全部</a>
+                <a href="javascript:;" class=" _j_search_link" @click="searchChange(0)">目的地</a>
+                <a href="javascript:;" class=" _j_search_link" @click="searchChange(1)">攻略</a>
+                <a href="javascript:;" class=" _j_search_link" @click="searchChange(2)">游记</a>
+                <a href="javascript:;" class="on _j_search_link" @click="searchChange(3)">找人</a>
+            </div>
+        </div>
+    </div>
+    <div class="wid clearfix">
+        <div class="ser-nums">
+            <div class="sr-nums">
+                <p class="ser-result-primary">
+                    以下是为您找到的“{{qo.keyword}}”相关结果{{page.totalElements}}条
+                </p>
+            </div>
+        </div>
+        <div class="flt1 ser-lt" id="_j_search_result_left">
+            <div class="_j_search_section" v-if="page.content&&page.content.length > 0">
+                <ul class="user-list-row">
+                    <li v-for="u in page.content">
+                        <div class="btns">
+                            <a class="btn-follow _j_user_follow" href="javascript:;" data-touid="75081249"
+                               data-has-followed="0"><i></i>关注</a>
+                            <a class="btn-msg _j_user_letter" href="javascript:;" data-touid="75081249">私信</a>
+                        </div>
+                        <span class="avatar"><a href="javascript:;" target="_blank" class="_j_search_link"><img
+                                :src="u.headImgUrl"
+                                title="假装有头像" style="width:45px;height:45px;"></a></span>
+                        <div class="base">
+                                <span class="name"><a href="javascript:;" target="_blank"
+                                                      class="_j_search_link">{{u.nickname}}-<span
+                                        v-html="u.city"></span></a></span>
+                            <a class="grade" href="javascript:;">LV.{{u.level}}</a>
+                        </div>
+                        <div class="nums">
+                            <a href="javascript:;" target="_blank" class="_j_search_link">游记：0</a>
+                            <a href="javascript:;" target="_blank" class="_j_search_link">粉丝：0</a>
+                            <a href="javascript:;" target="_blank" class="_j_search_link">回复：0</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <br><br>
+            <!--分页-->
+            <div style="float: right">
+                <div style="float: left;"><span style="line-height:30px"> 共{{page.totalPages}}页 / {{page.totalElements}}条&nbsp;&nbsp;&nbsp;</span>
+                </div>
+                <div id="pagination" class="jq-pagination" style="display: inline;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/search/searchUser.js"></script>
+</html>

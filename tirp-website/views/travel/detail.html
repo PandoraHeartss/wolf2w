@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelnotedetail.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script type="text/javascript" src="/js/system/travel/detail.js"></script>
+    <script type="text/javascript" src="/js/system/emoji.js"></script>
+    <script src="/js/vue/moment.min.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <style>
+        .vc_articleT img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "travel";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div class="main" id="app" v-cloak>
+    <div class="set_index" id="_j_cover_box" style="height: 449.667px;">
+        <div class="set_bg _j_load_cover"
+             style='z-index: 1; opacity: 1;' :style='{"background":"url("+detail.coverUrl+")"}'
+        >
+            <img :src="detail.coverUrl" style="display: none">
+        </div>
+        <div class="_j_titlebg">
+            <div class="title_bg"></div>
+            <div class="view_info" data-length="8">
+                <div class="vi_con">
+                    <h1 data-length="8" class="headtext lh80" style="white-space: nowrap; word-wrap: normal;">
+                        {{detail.title}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view_title clearfix">
+        <div id="pagelet-block-a674ace86856fc38da868e9d1ed7b49c" class="pagelet-block">
+            <div class="vt_center">
+                <div class="ding _j_ding_father">
+                    <a role="button" data-japp="articleding" rel="nofollow" data-iid="12655354" data-vote="7"
+                       class="up_act " title="顶">顶</a>
+                    <div class="num _j_up_num topvote12655354">{{detail.thumbsupnum}}</div>
+                </div>
+                <div class="person" data-cs-t="ginfo_person_operate">
+                    <a href="javascript:;" target="_blank" class="per_pic">
+                        <img width="120" height="120" :src="detail.author.headImgUrl">
+                    </a>
+                    <strong>
+                        <a href="javascript:;" target="_blank" class="per_name">{{detail.author.nickname}}({{detail.author.city}}) </a>
+                    </strong>
+
+                    <a href="javascript:;" target="_blank" class="per_grade" title="LV.9">LV.9</a>
+                    <a href="javascript:void(0);" class="per_attention" data-japp="following" data-uid="67648461"
+                       data-follow_class="hide">
+                        <img src="http://images.mafengwo.net/images/home/tweet/btn_sfollow.gif" width="38" height="13"
+                             border="0" title="关注TA">
+                    </a>
+                    <div class="vc_time">
+                        <span class="time">{{detail.createTime|dateFormat}}</span>
+                        <span><i class="ico_view"></i>{{detail.viewnum}}/{{detail.replynum}}</span>
+                    </div>
+                </div>
+
+                <div class="bar_share _j_share_father _j_top_share_group">
+                    <div class="bs_collect ">
+                        <a href="javascript:void(0);" rel="nofollow" title="收藏" class="bs_btn _j_do_fav"
+                           data-ctime="2019-05-07 21:16:29"><i></i><span>{{detail.favornum}}</span><strong>收藏</strong></a>
+                    </div>
+                    <div class="bs_share">
+                        <a href="javascript:void(0);" rel="nofollow" title="分享" class="bs_btn"><i></i><span>{{detail.sharenum}}</span><strong>分享</strong></a>
+                        <div class="bs_pop clearfix" style="display: none;">
+                            <a title="分享到新浪微博" rel="nofollow" role="button" class="sina"></a>
+                            <a title="分享到QQ空间" rel="nofollow" role="button" class="zone"></a>
+                            <a title="分享到微信" rel="nofollow" role="button" class="weixin"></a>
+                        </div>
+                    </div>
+                    <div class="bs_collect ">
+                        <a :href="'/views/travel/input.html?id='+detail.id"
+                           class="bs_btn _j_goto_comment"><i></i><strong>编辑</strong></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="view clearfix" style="position: relative;">
+        <div class="view_con">
+            <div class="travel_directory _j_exscheduleinfo">
+                <div class="tarvel_dir_list clearfix">
+                    <ul>
+                        <li class="time">出发时间<span>/</span>{{detail.travelTime|dateFormat}}<i></i></li>
+                        <li class="day">出行天数<span>/</span>{{detail.day}} 天</li>
+                        <li class="people">人物<span>/</span>{{detail.personDisplay}}</li>
+                        <li class="cost">人均费用<span>/</span>{{detail.perExpend}}RMB</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="vc_article vc_articleT" v-html="content.content" style="width: 100%"></div>
+
+            <div>
+                <div class="mfw-cmt-wrap" id="_j_reply_list">
+                    <!--评论-->
+                    <div class="mfw-cmt _j_reply_item" v-for="(c, index) in comments">
+                        <div class="mcmt-info">
+                            <div class="mcmt-photo">
+                                <a href="javascript:;" target="_blank">
+                                    <img :src="c.headImgUrl"
+                                         width="48" height="48">
+                                </a>
+                            </div>
+                            <div class="mcmt-user">
+                                <a href="javascript:;" target="_blank" class="name">{{c.nickname}}({{c.city}})</a>
+                                <a href="javascript:;" class="level">LV.{{c.level}}</a>
+                                <a href="javascript:;" class="identity identity-guide" target="_blank"></a>
+                                <a href="javascript:void(0);" class="per_attention" data-japp="following"
+                                   data-uid="76382990" data-follow_class="hide">
+                                    <img src="http://images.mafengwo.net/images/home/tweet/btn_sfollow.gif"
+                                         width="38" height="13" border="0" title="关注TA">
+                                </a>
+                            </div>
+                            <div class="mcmt-other">
+                                <span class="floor">{{index +1}}F</span>
+                            </div>
+                        </div>
+                        <div class="mcmt-con-wrap clearfix">
+                            <div class="mcmt-con">
+
+                                <div v-if="c.type==1">
+                                    <div class="mcmt-quote">
+                                        <p>引用 {{c.refComment.nickname}} 发表于 {{c.refComment.createTime}} 的回复：</p>
+                                        <p class="_j_reply_content" v-html="c.refComment.content"></p>
+                                    </div>
+                                    <div class="mcmt-word">
+                                        <p class="_j_reply_content">回复{{c.refComment.nickname}}：<span
+                                                v-html="c.content"></span></p>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <div class="mcmt-quote">
+                                    </div>
+                                    <div class="mcmt-word">
+                                        <p class="_j_reply_content" v-html='c.content'></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mcmt-tag"></div>
+
+                        </div>
+                        <div class="mcmt-bot">
+                            <div class="time">{{c.createTime|dateFormat}}</div>
+                            <div class="option">
+                                <input type="hidden" id="commentTpye" value="0">
+                                <input type="hidden" id="refCommentId" value="">
+                                <a role="button" class="_j_reply replyBtn" @click="toComment(c.nickname,c.id)">回复</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--发表回复-->
+                <div class="mcmt-reply-wrap _j_replywrap ">
+                    <div class="mcmt-tab">
+                        <ul class="_j_replytab">
+                            <li class="_j_publish_tab on" data-mode="article">回复游记<i></i></li>
+                        </ul>
+                    </div>
+                    <div class="mcmt-tab-con">
+                        <div class="photo-con">
+                            <a href="/u/53383161.html" target="_blank" title="蚂蜂测试窝用户"><img
+                                    src="http://n1-q.mafengwo.net/s12/M00/35/98/wKgED1uqIreAU9QZAAAXHQMBZ74008.png?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90"
+                                    alt="骡窝窝测试用户"></a>
+                        </div>
+                        <div class="reply-con clearfix _j_article_mode _j_editor" id="_j_editor"
+                             style="display: block;">
+                            <dl>
+                                <dt>
+                                    <!-- 各种选项-->
+                                    <div class="reply-choice">
+                                        <a role="button" class="expression" id="_j_replyfacetrigger"
+                                           @click="emotionClick($event)" title="选择表情"></a>
+                                        <div class="clear"></div>
+                                        <!--表情-->
+                                        <div class="art_pop art_newpop _j_face_pop hide" id="_js_replyExpression"
+                                             style="display: none;">
+                                            <div class="art_newtab">
+                                                <div class="newtab-nav">
+                                                    <ul class="_j_switch_container">
+                                                        <li class="cur _j_face_tab" @click="faceTabClick($event)">小蚂小蜂
+                                                        </li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">常用表情</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">人物心情</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">旅行相关</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">服饰运动</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">食物节日</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">动物植物</li>
+                                                        <li class="_j_face_tab" @click="faceTabClick($event)">工具及其他</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="newtab-pagin" data-page="1">
+                                                    <a class="newtab-prev disabled _j_face_switch" data-type="prev"
+                                                       @click="newtabPrev($event)"
+                                                       href="javascript:void(0);"><i><i></i></i></a>
+                                                    <a class="newtab-next _j_face_switch" data-type="next"
+                                                       @click="newtabNext($event)"
+                                                       href="javascript:void(0);"><i><i></i></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="art_newface art_newface1 _j_emojilist"
+                                                 data-emotion="brands">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="愤怒小蜂"><img
+                                                            src="/images/emoji/brands_v3/38@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="害羞小蜂"><img
+                                                            src="/images/emoji/brands_v3/39@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="白眼小蜂"><img
+                                                            src="/images/emoji/brands_v3/40@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="机智小蜂"><img
+                                                            src="/images/emoji/brands_v3/41@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="奸笑小蜂"><img
+                                                            src="/images/emoji/brands_v3/42@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="扮酷小蚂"><img
+                                                            src="/images/emoji/brands_v3/2@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="大哭小蜂"><img
+                                                            src="/images/emoji/brands_v3/4@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="大笑小蜂"><img
+                                                            src="/images/emoji/brands_v3/5@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="得意小蜂"><img
+                                                            src="/images/emoji/brands_v3/6@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="犯色相小蚂"><img
+                                                            src="/images/emoji/brands_v3/7@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="害羞小蚂"><img
+                                                            src="/images/emoji/brands_v3/9@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="尴尬小蜂"><img
+                                                            src="/images/emoji/brands_v3/10@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="哼小蚂"><img
+                                                            src="/images/emoji/brands_v3/11@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="坏笑小蜂"><img
+                                                            src="/images/emoji/brands_v3/12@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="可怜哭小蜂"><img
+                                                            src="/images/emoji/brands_v3/13@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="困小蜂"><img
+                                                            src="/images/emoji/brands_v3/15@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="流汗小蚂"><img
+                                                            src="/images/emoji/brands_v3/16@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="么么哒小蚂"><img
+                                                            src="/images/emoji/brands_v3/17@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="晕小蜂"><img
+                                                            src="/images/emoji/brands_v3/18@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="爱心小蜂"><img
+                                                            src="/images/emoji/brands_v3/20@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="偷笑小蚂"><img
+                                                            src="/images/emoji/brands_v3/21@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="微笑小蚂"><img
+                                                            src="/images/emoji/brands_v3/23@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="心碎小蜂"><img
+                                                            src="/images/emoji/brands_v3/24@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="再见小蜂"><img
+                                                            src="/images/emoji/brands_v3/28@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="赞小蜂"><img
+                                                            src="/images/emoji/brands_v3/29@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="抓狂小蚂"><img
+                                                            src="/images/emoji/brands_v3/31@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="捂脸小蜂"><img
+                                                            src="/images/emoji/brands_v3/36@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="笑哭">
+                                                        <img
+                                                                src="/images/emoji/brands_v3/37@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="golden">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大笑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/1@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="微笑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/2@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="亲亲">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/3@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="色色">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/5@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="笑cry"><img
+                                                            src="/images/emoji/daily_v2/79@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="无奈">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/6@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="睡觉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/19@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="害羞">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/8@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="酷">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/9@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鬼脸">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/12@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大哭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/21@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="生气">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/27@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="抓狂">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/52@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="汗">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/54@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="惊悚">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/83@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="生病">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/47@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="闭嘴">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/25@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="精灵">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/44@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="邪恶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/85@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="魅力四射"><img
+                                                            src="/images/emoji/daily_v2/30@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="吻">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/33@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="爱心">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/32@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="心碎">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/31@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="剪刀手"><img
+                                                            src="/images/emoji/daily_v2/88@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="再见">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/20@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="赞">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/28@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鼓掌">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/96@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="祈祷">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/78@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="甜蜜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/104@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="太阳">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/72@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="下雨">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/67@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="闪电">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/110@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="雪">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/112@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="星星">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/43@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="月亮">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/62@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="飞机">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/114@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="自行车"><img
+                                                            src="/images/emoji/daily_v2/132@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="人民币"><img
+                                                            src="/images/emoji/daily_v2/56@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="王冠">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/162@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="足球">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/41@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="苹果">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/38@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="香蕉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/184@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="西瓜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/39@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="糖果">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/196@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蜂蜜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/197@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="餐厅">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/64@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="咖啡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/40@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="干杯">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/16@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="蝴蝶结"><img
+                                                            src="/images/emoji/daily_v2/201@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="礼物">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/37@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="生日蛋糕"><img
+                                                            src="/images/emoji/daily_v2/36@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="庆祝">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/207@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蚂蚁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/211@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蜜蜂">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/212@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="狗狗">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/69@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="猫猫">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/68@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="兔子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/215@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="樱花">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/232@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="玫瑰">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/35@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="时钟">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/235@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="放大镜"><img
+                                                            src="/images/emoji/daily_v2/237@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="注意">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/51@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="铅笔">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/240@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="信">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/73@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="灯泡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/243@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="对话">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/245@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="图钉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/246@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="喇叭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/247@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="音乐">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/63@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="置顶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/258@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="character">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大笑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/1@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="微笑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/2@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="亲亲">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/3@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="色色">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/5@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="笑cry"><img
+                                                            src="/images/emoji/daily_v2/79@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="无奈">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/6@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="睡觉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/19@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="害羞">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/8@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="酷">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/9@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="晕倒">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/10@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="眨眼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/11@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鬼脸">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/12@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大哭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/21@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大怒">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/46@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="生气">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/27@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="不爽">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/53@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="尴尬">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/80@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="嘴馋">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/50@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="呵呵">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/81@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="冷漠">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/131@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="失落">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/34@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="困惑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/17@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="吃惊">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/14@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="抓狂">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/52@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="汗">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/54@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="焦虑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/82@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="惊悚">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/83@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="生病">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/47@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="药丸">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/76@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="闭嘴">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/25@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="小丑">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/45@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="精灵">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/44@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="天使">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/84@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="邪恶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/85@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="骷髅">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/70@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="魅力四射"><img
+                                                            src="/images/emoji/daily_v2/30@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="吻">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/33@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="爱心">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/32@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="心碎">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/31@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="看">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/86@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="嘴唇">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/87@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="剪刀手"><img
+                                                            src="/images/emoji/daily_v2/88@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="击掌">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/89@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="上">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/90@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="下">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/91@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="左">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/92@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="右">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/93@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="再见">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/20@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="OK">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/94@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="赞">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/28@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="加油">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/95@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鼓掌">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/96@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="祈祷">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/78@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="举手">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/97@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="不行">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/98@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="狼狈">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/130@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="男孩">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/74@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="女孩">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/75@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="男人">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/99@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="女人">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/100@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="爷爷">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/101@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="奶奶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/102@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="宝宝">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/103@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="甜蜜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/104@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="家庭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/105@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="情侣">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/106@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="基友">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/107@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="闺蜜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/108@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="travel">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="太阳">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/72@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="云">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/109@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="下雨">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/67@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="闪电">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/110@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="多云">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/111@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="雪">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/112@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="星星">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/43@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="月亮">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/62@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="地球">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/113@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="飞机">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/114@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="火箭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/115@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="直升机"><img
+                                                            src="/images/emoji/daily_v2/116@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="火车">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/117@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="电车">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/118@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="高铁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/119@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="地铁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/120@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="火车站"><img
+                                                            src="/images/emoji/daily_v2/121@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="巴士">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/122@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="出租车"><img
+                                                            src="/images/emoji/daily_v2/123@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="汽车">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/124@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="加油站"><img
+                                                            src="/images/emoji/daily_v2/125@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="码头">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/126@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="游轮">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/127@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="帆船">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/128@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="缆车">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/129@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="自行车"><img
+                                                            src="/images/emoji/daily_v2/132@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="红绿灯"><img
+                                                            src="/images/emoji/daily_v2/133@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="路障">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/134@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="停车场"><img
+                                                            src="/images/emoji/daily_v2/135@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="残疾人专用"><img
+                                                            src="/images/emoji/daily_v2/136@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="ATM"><img
+                                                            src="/images/emoji/daily_v2/137@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="换钱">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/138@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="银行卡"><img
+                                                            src="/images/emoji/daily_v2/139@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="人民币"><img
+                                                            src="/images/emoji/daily_v2/56@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="美元">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/140@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="欧元">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/141@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="中国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/142@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="德国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/143@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="英国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/144@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="美国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/145@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="俄罗斯"><img
+                                                            src="/images/emoji/daily_v2/146@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="西班牙"><img
+                                                            src="/images/emoji/daily_v2/147@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="意大利"><img
+                                                            src="/images/emoji/daily_v2/148@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="法国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/149@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="日本">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/150@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="韩国">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/151@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="日出">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/152@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="夜景">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/153@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="露营">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/154@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="星空">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/155@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="火山">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/156@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="彩虹">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/157@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="游乐园"><img
+                                                            src="/images/emoji/daily_v2/158@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="海浪">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/159@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="房子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/160@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="足迹">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/161@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="apparel">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="王冠">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/162@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="草帽">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/163@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="零钱包"><img
+                                                            src="/images/emoji/daily_v2/164@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="眼镜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/165@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="女装">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/166@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="男装">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/167@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="裤子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/168@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="裙子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/169@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="比基尼"><img
+                                                            src="/images/emoji/daily_v2/170@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="和服">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/171@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="跳舞">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/172@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="走路">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/173@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="跑步">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/174@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="冲浪">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/175@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="滑雪">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/176@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="游泳">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/177@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="钓鱼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/178@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="足球">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/41@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="篮球">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/179@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="赛车">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/180@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="冠军">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/181@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="food">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="苹果">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/38@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="西瓜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/39@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="柠檬">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/182@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="葡萄">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/183@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="香蕉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/184@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="橙子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/185@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="菠萝">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/186@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="樱桃">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/187@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="草莓">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/188@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="汉堡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/189@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="肉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/190@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="面条">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/191@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="快餐">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/192@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="寿司">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/193@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="冰淇淋"><img
+                                                            src="/images/emoji/daily_v2/194@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="巧克力"><img
+                                                            src="/images/emoji/daily_v2/195@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="糖果">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/196@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蜂蜜">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/197@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="餐厅">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/64@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="咖啡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/40@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="红酒">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/198@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="果汁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/199@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="啤酒">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/200@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="干杯">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/16@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="蝴蝶结"><img
+                                                            src="/images/emoji/daily_v2/201@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="礼物">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/37@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="生日蛋糕"><img
+                                                            src="/images/emoji/daily_v2/36@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="万圣节"><img
+                                                            src="/images/emoji/daily_v2/202@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="圣诞节"><img
+                                                            src="/images/emoji/daily_v2/203@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="圣诞老人"><img
+                                                            src="/images/emoji/daily_v2/204@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="雪人">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/205@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="铃铛">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/206@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="庆祝">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/207@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="气球">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/208@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="风铃">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/209@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="灯笼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/210@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="animal">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蚂蚁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/211@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="蜜蜂">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/212@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="瓢虫">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/213@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="狗狗">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/69@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="猫猫">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/68@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="牛">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/214@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="虎">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/263@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="兔子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/215@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="熊猫">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/216@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="熊">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/285@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="考拉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/217@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="猴子">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/218@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="猪头">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/60@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="青蛙">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/219@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="仓鼠">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/220@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鸡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/221@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="企鹅">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/222@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="章鱼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/223@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="海豚">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/224@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="鱼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/225@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="马">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/226@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="羊">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/227@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="大象">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/228@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="骆驼">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/229@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="仙人掌"><img
+                                                            src="/images/emoji/daily_v2/230@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="椰子树"><img
+                                                            src="/images/emoji/daily_v2/231@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="樱花">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/232@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="玫瑰">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/35@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="向日葵"><img
+                                                            src="/images/emoji/daily_v2/233@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="枫叶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/234@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="art_newface art_newface2 _j_emojilist hide"
+                                                 data-emotion="tool">
+                                                <ul>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="时钟">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/235@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="倒计时"><img
+                                                            src="/images/emoji/daily_v2/236@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="放大镜"><img
+                                                            src="/images/emoji/daily_v2/237@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="环保">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/238@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="注意">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/51@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="停止">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/239@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="铅笔">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/240@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="信">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/73@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="邮筒">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/241@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="书">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/242@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="灯泡">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/243@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="火">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/244@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="对话">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/245@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="图钉">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/246@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="喇叭">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/247@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="电话">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/248@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="手机">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/249@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="信号">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/250@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="电池">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/251@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="插头">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/252@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="照相机"><img
+                                                            src="/images/emoji/daily_v2/253@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="录像机"><img
+                                                            src="/images/emoji/daily_v2/254@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="票">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/255@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="音乐">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/63@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="绘画">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/256@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="锁">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/257@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="置顶">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/258@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)"
+                                                        title="十八禁"><img
+                                                            src="/images/emoji/daily_v2/259@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="秘密">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/260@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="正确">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/261@2x.png">
+                                                    </li>
+                                                    <li class="_j_emojiitem" @click="emojiitemClick($event)" title="错误">
+                                                        <img
+                                                                src="/images/emoji/daily_v2/262@2x.png">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </dt>
+                                <dd>
+                                    <div class="reply-text">
+                                        <textarea class="_j_replyarea" name="content" cols="30" rows="10"
+                                                  id="commentContent" placeholder=""></textarea>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <div class="reply-submit">
+                                <!-- 有loading状态 -->
+                                <a role="button" class="_j_publish_reply commentBtn" @click="commentAdd($event)"
+                                   title="发表回复">发表回复</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="view_side">
+            <div class="relations _j_stas_content">
+                <div id="pagelet-block-b50249fefe90f4816744a1eed56a7049" class="pagelet-block"
+                     data-api=":note:pagelet:rightMddApi" data-params="{&quot;iid&quot;:&quot;12655354&quot;}"
+                     data-async="1" data-controller="">
+                    <div class="slide-right-container">
+                        <div class="relation_mdd">相关目的地： &nbsp;&nbsp;
+                            <a :href="'/views/destination/guide.html?id='+t.id" target="_blank"
+                               title="t.name" class="_j_mdd_stas" v-for="t in toasts">{{t.name}} &nbsp;&nbsp;</a>
+                        </div>
+                        <div class="its_others">
+                            <div class="mdd_info">
+                                <a :href="'/views/destination/guide?id='+dest.id" title="detail.name"
+                                   class="_j_mdd_stas" target="_blank">
+                                    <img :src="dest.coverUrl"
+                                         width="240px">
+                                    <i></i>
+                                    <strong>{{dest.name}}</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side_sticky _j_sticky_block">
+                <div id="pagelet-block-cf05fa839072c3781ee6b0ff89ced384" class="pagelet-block">
+                    <div class="mainmdd_rel_notes _j_topblock" id="_j_mainmdd_rel_gls">
+                        <div class="notes_gonglve" style="margin-bottom: 0">
+                            <div class="side_title">相关攻略</div>
+                            <div class="gonglve_slide gs1" id="_j_gl_slide_container">
+                                <ul class="gs_content" style="left: 0px;">
+                                    <li v-for="s in strategies">
+                                        <a :href="'/views/strategy/detail.html?id='+s.id" target="_blank"
+                                           class="_j_mddrel_gl_item"
+                                           title="s.title"><img :src="s.coverUrl">
+                                            <div class="bg"></div>
+                                            <span><i></i>{{s.viewnum}}</span>
+                                            <h3>{{s.title}}</h3>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <ul class="gs_nav gs_nav3">
+                                    <li data-id="0" class="gs_nav_item1 _j_gl_item_switch on"></li>
+                                    <li data-id="1" class="gs_nav_item2  _j_gl_item_switch"></li>
+                                    <li data-id="2" class="gs_nav_item3  _j_gl_item_switch"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pagelet-block-9ec395fc9c1fc520835dc7de18ceacb1" class="pagelet-block">
+                <div class="mainmdd_rel_notes _j_topblock" id="_j_mainmdd_rec_gls">
+                    <div class="notes_gonglve" style="margin-bottom: 0">
+                        <div class="side_title">相关游记</div>
+                        <div class="gonglve_slide gs1" id="_j_rec_slide_container">
+                            <ul class="gs_content" style="left: 0px;">
+                                <li v-for="t in travels">
+                                    <a :href="'/views/travel/detail.html?id='+t.id" target="_blank"
+                                       class="_j_mddrel_gl_item"
+                                       title="{{t.title}}">
+                                        <img :src="t.coverUrl">
+                                        <div class="bg"></div>
+                                        <span><i></i>{{t.viewnum}}</span>
+                                        <h3>{{t.title}}</h3>
+                                    </a>
+                                </li>
+
+                            </ul>
+                            <ul class="gs_nav gs_nav3">
+                                <li data-id="0" class="gs_nav_item1 _j_gl_item_switch on"></li>
+                                <li data-id="1" class="gs_nav_item2  _j_gl_item_switch"></li>
+                                <li data-id="2" class="gs_nav_item3  _j_gl_item_switch"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+
+</body>
+
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/travel/detail.js"></script>
+</html>

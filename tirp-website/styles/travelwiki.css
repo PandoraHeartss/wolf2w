@@ -1,0 +1,151 @@
+.clearfix:after {
+    content: '';
+    clear: both;
+    height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.wiki-wrapper {
+    margin-top: 10px;
+}
+
+.wiki-aside {
+    float: left;
+    width: 250px;
+}
+
+.wiki-nav {
+    line-height: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.wiki-nav li {
+    padding: 20px 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.wiki-nav a {
+    display: block;
+    height: 20px;
+    width: 210px;
+    padding-left: 20px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wiki-nav .on a:before {
+    content: '';
+    float: left;
+    margin-left: -21px;
+    width: 3px;
+    height: 20px;
+    background-color: #ff9d00;
+}
+
+.wiki-nav .on a {
+    color: #ff9d00;
+}
+
+.wiki-cont {
+    float: right;
+    width: 690px;
+    padding-top: 10px;
+}
+
+.wiki-title {
+    margin-bottom: 30px;
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+}
+
+.wiki-title:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 24px;
+    height: 3px;
+    background-color: #666;
+}
+
+.wiki-cont h1,
+.wiki-cont h2,
+.wiki-cont h3,
+.wiki-cont .h1,
+.wiki-cont .h2,
+.wiki-cont .h3 {
+    font-weight: normal;
+    color: #333;
+}
+
+.wiki-cont h1,
+.wiki-cont .h1 {
+    font-size: 24px;
+}
+
+.wiki-title .h1 {
+    float: left;
+}
+
+.wiki-title .counter {
+    float: right;
+    margin-top: 15px;
+    color: #999;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.wiki-title .view {
+    margin-right: 20px;
+}
+
+.wiki-title .like {
+    display: inline-block;
+    color: #999;
+}
+
+.wiki-title .view i {
+    display: inline-block;
+    margin-right: 5px;
+    width: 18px;
+    height: 14px;
+    background: url(../images/place-wiki-icon.png) no-repeat -30px 0;
+    overflow: hidden;
+    vertical-align: -3px;
+    *vertical-align: middle;
+}
+
+.wiki-title .like i {
+    display: inline-block;
+    margin-right: 8px;
+    width: 20px;
+    height: 22px;
+    background: url(../images/place-wiki-icon.png) no-repeat 0 0;
+    overflow: hidden;
+    vertical-align: -4px;
+    *vertical-align: middle;
+}
+
+.wiki-title .like:hover {
+    text-decoration: none;
+}
+
+.wiki-title .like-on,
+.wiki-title .like:hover {
+    color: #ff9d00;
+}
+
+.wiki-title .like-on i,
+.wiki-title .like:hover i {
+    background-position: 0 -30px;
+}

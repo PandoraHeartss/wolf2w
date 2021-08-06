@@ -1,0 +1,1100 @@
+body {
+    font-family: Arial, verdana, "Lucida Grande", "Microsoft Yahei", "Hiragino Sans GB", "Hiragino Sans GB W3", SimSun, STHeiti;
+    background-color: #efefef;
+    color: #666;
+    overflow-x: hidden;
+    min-width: 980px;
+}
+
+a {
+    color: #ff9d00;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+.topBar {
+    height: 46px;
+    width: 100%;
+    background-color: rgba(34, 35, 36, 0.95);
+    /* background-color: #2d2e2f\9; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    font-family: "Microsoft Yahei";
+}
+
+.topBarC {
+    width: 1000px;
+    margin: 0 auto;
+    height: 46px;
+}
+
+.topBarC .logo {
+    position: relative;
+}
+
+.topBarC .logo {
+    float: left;
+    width: 32px;
+    display: inline;
+    margin: 9px 20px 0 0;
+}
+
+.topBarC .logo a {
+    display: inline-block;
+    height: 29px;
+    width: 32px;
+    background: url(../images/logo.png) 0 0 no-repeat;
+    text-indent: -9999px;
+    *text-indent: 0;
+    *line-height: 200px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.t_nav {
+    float: left;
+}
+
+.t_nav li {
+    float: left;
+    height: 46px;
+    margin-right: 1px;
+    position: relative;
+    z-index: 1;
+    zoom: 1;
+}
+
+.t_nav li .t {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+}
+
+.t_nav li .t a,
+.user_info .infoItem,
+.t_info .newmsg a {
+    float: left;
+    display: block;
+    height: 16px;
+    padding: 15px 17px;
+    color: #fff;
+    line-height: 16px;
+    line-height: 19px \9;
+    overflow: hidden;
+}
+
+.t_nav li .t a:hover,
+.user_info .infoItem:hover,
+.t_nav li:hover .t a,
+.t_nav li.hover .t a,
+.user_info .account:hover .infoItem,
+.user_info .account.hover .infoItem,
+.user_info .msg:hover .infoItem {
+    background-color: #000;
+}
+
+.t_search {
+    float: left;
+    margin: 10px 0 0 5px;
+    width: 150px;
+    height: 26px;
+    background-color: #4a4b4c;
+    overflow: hidden;
+    position: relative;
+}
+
+.t_search .key {
+    float: left;
+    width: 112px;
+    height: 26px;
+    margin: 0;
+    padding: 0 30px 0 8px;
+    border: 0 none;
+    background: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.t_search .btn {
+    position: absolute;
+    right: 9px;
+    top: 5px;
+    border: 0 none;
+    width: 16px;
+    height: 16px;
+    background: url(../images/topbar-bg.png) 0 -34px;
+    _background: url(../images/topBar-bg_ie6.gif) 0 -34px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.t_info {
+    float: right;
+    color: #fff;
+    vertical-align: top;
+}
+
+.t_info a {
+    color: #fff;
+}
+
+.t_info .user_info {
+    height: 46px;
+    float: right;
+}
+
+.t_info .user_info li {
+    float: left;
+    margin-left: 1px;
+    font-size: 12px;
+}
+
+.t_info .user_info li.daka {
+    position: relative;
+    margin-top: 11px;
+    margin-right: 15px;
+    width: 60px;
+}
+
+.t_info .msg {
+    position: relative;
+}
+
+.t_info .user_info .ub-new-msg {
+    margin: 0;
+    width: 0;
+    height: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.t_info .account {
+    position: relative;
+    z-index: 10;
+}
+
+.daka_btn {
+    display: block;
+    width: 100%;
+}
+
+.daka_btn a {
+    width: 100%;
+    height: 24px;
+    background-color: #1493e3;
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.daka_btn .daka_after,
+.daka_complete .daka_before {
+    display: none;
+}
+
+.t_info .msg span {
+    display: inline-block;
+}
+
+.t_info .msg a {
+    padding-right: 20px;
+}
+
+.t_info .user_info .drop-bd {
+    position: absolute;
+    right: 0;
+    width: 130px;
+    top: 46px;
+    background-color: #222;
+    opacity: .9;
+    filter: alpha(opacity=90);
+    padding-bottom: 5px;
+    display: none;
+    z-index: 97;
+}
+
+.t_info .user_info .infoItem {
+    padding-left: 12px;
+    padding-right: 25px;
+    font-size: 16px;
+}
+
+.topBarC .t b,
+.user_info .infoItem b {
+    position: absolute;
+    right: 12px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-width: 4px;
+    border-style: solid dashed dashed dashed;
+    border-color: #999 transparent transparent transparent;
+}
+
+.t_nav li.drop .t a {
+    padding-right: 25px;
+}
+
+.t_info .user_info .drop-bd li {
+    height: 29px;
+    float: none;
+    margin: 0;
+    display: block;
+}
+
+.t_info .user_info .drop-bd li a {
+    padding: 0 10px;
+    height: 29px;
+    line-height: 29px;
+    display: block;
+    color: #fff;
+    opacity: .9;
+}
+
+.t_info .user_info .drop-bd li a:hover {
+    background-color: #000;
+    text-decoration: none;
+}
+
+.topBar .uSet {
+    position: absolute;
+    right: 0;
+    top: 46px;
+    width: 170px;
+    background-color: #222;
+    background-color: rgba(34, 34, 34, .95);
+    padding: 0 0 10px;
+    display: none;
+}
+
+.t_info .account .t a {
+    padding-right: 25px;
+    padding: 7px 22px 7px 10px;
+    height: auto;
+}
+
+.t_info .account .t a img {
+    float: left;
+    margin: 0;
+    border-radius: 32px;
+}
+
+.t_info .account .t a b {
+    right: 9px;
+}
+
+.topBar .uSet .asset {
+    margin-bottom: 5px;
+    padding-left: 10px;
+    line-height: 30px;
+    background-color: #ff9d00;
+    color: #fff;
+}
+
+.topBar .uSet a {
+    display: block;
+    text-align: left;
+    padding: 7px 10px;
+    height: 15px;
+    color: #FFF;
+}
+
+.topBar .uSet .tb-level {
+    margin-left: 10px;
+    color: #ef523d;
+}
+
+.banner {
+    position: relative;
+}
+
+.tags_bar {
+    margin-top: 46px;
+    height: 58px;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: #d6d6d6 1px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.center {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.banner .center {
+    height: 480px;
+}
+
+.flt1 {
+    float: left;
+}
+
+.flt2 {
+    float: right;
+}
+
+.tags_bar ul {
+    float: right;
+}
+
+.tags_bar li {
+    float: left;
+    position: relative;
+    z-index: 10;
+}
+
+.tags_bar li .tags_link {
+    display: block;
+    margin-left: 12px;
+    margin-top: 10px;
+    padding: 0 15px;
+    position: relative;
+    font-size: 18px;
+    height: 48px;
+    line-height: 38px;
+    color: #444;
+    border-radius: 5px 5px 0 0;
+    z-index: 1;
+}
+
+.tags_bar li .tags_link:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #ff8a00;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+}
+
+.tags_bar li.on .tags_link:after {
+    display: block;
+}
+
+.tags_bar li .tags_link:hover {
+    color: #ff8a00;
+}
+
+.side_bar {
+    width: 280px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+    position: relative;
+    border-top-style: none;
+    z-index: 10;
+    padding-bottom: 55px;
+}
+
+.MAvatar {
+    text-align: center;
+    font-size: 14px;
+}
+
+.MAvaImg {
+    width: 120px;
+    height: 70px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.MAvaName {
+    font-size: 22px;
+    line-height: 24px;
+    margin-top: 16px;
+}
+
+.its_tags {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.side_bar .MAvaInfo {
+    padding: 0 15px;
+}
+
+.MAvaInfo span {
+    padding: 0 15px 0 12px;
+    display: inline-block;
+    position: relative;
+}
+
+.MAvaProfile {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.MAvaMore {
+    margin-top: 20px;
+    border-top: #e2e2e2 1px solid;
+    border-bottom: #e2e2e2 1px solid;
+}
+
+.MAvaImg img {
+    position: relative;
+    top: -50px;
+    z-index: 20;
+    border-radius: 120px;
+}
+
+.MAvaUp {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 0;
+    top: -50px;
+    z-index: 20;
+    border-radius: 120px;
+}
+
+.MAvaUp:before,
+.MAvaUp:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 120px;
+}
+
+.MAvaUp:before {
+    transform: scale(0);
+    transition: transform .3s ease-out 0s;
+    -webkit-transform: scale(0);
+    -webkit-transition: -webkit-transform .3s ease-out 0s;
+}
+
+.Mphoto {
+    width: 24px;
+    height: 20px;
+    background-position: 0 -215px;
+    background-image: url(../images/ico_sprite_v8.png);
+    display: inline-block;
+}
+
+.MAvaUp .Mphoto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -10px 0 0 -12px;
+}
+
+.MGenderMale,
+.MGenderFemale,
+.MGenderSecret {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -236px;
+}
+
+.MAvaName i,
+.MAvaName a {
+    vertical-align: middle;
+    margin-left: 7px;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+
+.its_tags i {
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(../images/home_sprite_v15.png);
+    background-position: 0 -460px;
+    margin-right: 3px;
+}
+
+.its_tags .duo {
+    width: 30px;
+    background-position: -41px -460px;
+}
+
+.its_tags .zhiluren {
+    width: 38px;
+    background-position: -72px -460px;
+}
+
+.MAvaMyInfo span {
+    padding: 0 10px 0 7px;
+}
+
+.MAvaMyInfo .MAvaSet {
+    padding: 0 0 0 5px;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+}
+
+.MAvaInfo .MAvaLevel a {
+    color: #ea3c1a;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.MAvaInfo .MAvaLevel:after {
+    content: '';
+    background-color: #d6d6d6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 16px;
+}
+
+.MAvaMyInfo .MAvaPlace:after {
+    content: '';
+    background-color: #d6d6d6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 16px;
+}
+
+.MAvaMyInfo .MAvaSet a {
+    width: 17px;
+    height: 17px;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: -108px -146px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.MAvaProfile .MProfile {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6em;
+    text-align: left;
+    padding: 0 0 0 10px;
+    position: relative;
+}
+
+.hide {
+    display: none;
+}
+
+.MAvaProfile .MProfile:before,
+.MAvaProfile .MProfile:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 6px;
+    position: absolute;
+    background: url(../images/ico_sprite_v8.png) no-repeat;
+}
+
+.MAvaProfile .MProfile:after {
+    right: 0;
+    bottom: 12px;
+    background-position: -26px -257px;
+}
+
+.MAvaProfile .MProfile:before {
+    left: 0;
+    top: 5px;
+    background-position: -18px -257px;
+}
+
+
+.MAvaProfile pre {
+    font-family: Arial, verdana, "Lucida Grande", "Microsoft Yahei", "Hiragino Sans GB", "Hiragino Sans GB W3", SimSun, STHeiti;
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.MProfile pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.MAvaMore .MAvaNums {
+    position: relative;
+    width: 33%;
+    float: left;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 20px;
+}
+
+.MAvaMore .MAvaNums strong {
+    font-size: 20px;
+    color: #444;
+    font-family: Arial;
+}
+
+.MAvaMore .MAvaNums strong a {
+    color: #444;
+}
+
+.MAvaMore .MAvaNums:after {
+    content: '';
+    width: 1px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #e2e2e2;
+}
+
+.MAvaMore .MAvaNums strong {
+    font-size: 20px;
+    color: #444;
+    font-family: Arial;
+}
+
+.MAvaMore .MAvaNums strong a {
+    color: #444;
+}
+
+.MAvaMore .MAvaNums p {
+    font-size: 14px;
+}
+
+.MAvaMore .last:after {
+    display: none;
+}
+
+.MUsers {
+    padding: 45px 30px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.MUsersTitle {
+    font-size: 16px;
+    color: #444;
+}
+
+.MUsersDetail {
+    margin-top: 18px;
+    overflow: hidden;
+}
+
+.MUsersDetail .MUsersAtom {
+    width: 1000px;
+    overflow: hidden;
+    *zoom: 1;
+}
+
+.MSimplePages {
+    text-align: center;
+}
+
+.MUsersDetail ul {
+    width: 240px;
+    float: left;
+}
+
+.MUsersDetail li {
+    width: 52px;
+    float: left;
+    margin-right: 4px;
+    margin-bottom: 20px;
+}
+
+.MUsersDetail li img {
+    border-radius: 48px;
+}
+
+.MUsersDetail li p a {
+    line-height: 16px;
+    height: 16px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    color: #ff7200;
+    font-size: 12px;
+}
+
+.MSimplePages {
+    text-align: center;
+}
+
+.MPrev,
+.MNext {
+    width: 20px;
+    height: 20px;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: -47px -39px;
+    display: inline-block;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: default;
+}
+
+.MPrev.disabled {
+    background-position: -129px -59px;
+}
+
+.MNext {
+    background-position: -68px -39px;
+}
+
+.content {
+    width: 682px;
+    margin-top: 18px;
+}
+
+.flt2 {
+    float: right;
+}
+
+.my_notes {
+    padding-bottom: 30px;
+}
+
+.common_block {
+    margin-bottom: 18px;
+    background-color: #fff;
+    border: #e2e2e2 1px solid;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.notes_list {
+    position: relative;
+}
+
+.notes_list {
+    overflow: hidden;
+    *zoom: 1;
+    transition: height .5s ease-out 0s;
+    -webkit-transition: height .5s ease-out 0s;
+}
+
+.more_notes {
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    height: 38px;
+}
+
+.notes_list li {
+    transition: .5s ease-out 0s;
+    -webkit-transition: .5s ease-out 0s;
+    overflow: hidden;
+}
+
+.notes_list dl {
+    padding-bottom: 40px;
+}
+
+.notes_list dt {
+    position: relative;
+}
+
+.notes_list dd {
+    padding: 20px 30px 0;
+}
+
+.notes_list dt .thumb_description {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.notes_list dt .thumb_description strong {
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.MDing {
+    float: right;
+}
+
+.note_info {
+    width: 502px;
+    float: left;
+}
+
+.note_word {
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 24px;
+}
+
+.MDing span,
+.MDing a {
+    vertical-align: middle;
+    line-height: 33px;
+}
+
+.MDing span {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff9d00;
+    font-weight: normal;
+}
+
+.MDing a {
+    width: 37px;
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -90px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(228, 128, 11, 0.71);
+}
+
+.note_more {
+    margin-top: 10px;
+    color: #999;
+}
+
+.note_info h3 a {
+    line-height: 24px;
+    color: #ff8a00;
+    font-size: 18px;
+}
+
+.note_more span {
+    font-family: Arial;
+    margin-right: 6px;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.MInfoNum {
+    font-family: Arial;
+    margin-right: 6px;
+    font-size: 14px;
+    color: #999;
+}
+
+.MInfoNum i {
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -124px;
+    width: 18px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.MInfoNum i,
+.MInfoNum em {
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.MInfoNum em {
+    font-style: normal;
+}
+
+.note_more span {
+    font-family: Arial;
+    margin-right: 6px;
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.note_more .time {
+    margin-right: 15px;
+    position: relative;
+    top: 1px;
+    margin-left: 5px;
+}
+
+.common_block {
+    margin-bottom: 18px;
+    background-color: #fff;
+    border: #e2e2e2 1px solid;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.my_ask {
+    padding: 30px 30px 35px;
+}
+
+.my_dp {
+    padding-bottom: 35px;
+}
+
+.dp_list dl {
+    padding: 20px 0;
+    border-top: #e5e5e5 1px solid;
+    position: relative;
+}
+
+.dp_list .first dl {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.dp_title {
+    width: 445px;
+}
+
+.MStar {
+    *zoom: 1;
+    line-height: 18px;
+}
+
+.MStar {
+    margin-top: 10px;
+}
+
+.dp_ding {
+    width: 50px;
+    text-align: center;
+    margin-left: 2px;
+}
+
+.dp_ding a {
+    width: 32px;
+    height: 32px;
+    background-image: url(../images/home_sprite_v15.png);
+    background-position: -99px -210px;
+    display: inline-block;
+}
+
+.dp_ding strong {
+    font-size: 14px;
+    font-family: Verdana;
+    display: block;
+}
+
+.more_notes .btn_deleted {
+    position: absolute;
+    left: 34px;
+    top: 15px;
+    font-size: 14px;
+}
+
+.more_notes .btn_deleted i {
+    float: left;
+    margin: 2px 5px 0 0;
+    width: 17px;
+    height: 17px;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: -50px -215px;
+}
+
+.dp_title a {
+    font-size: 16px;
+    color: #999;
+}
+
+.dp_title a span {
+    color: #ff8a00;
+}
+
+.MStar .MStarIco {
+    width: 102px;
+    height: 18px;
+    position: relative;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -146px;
+    float: left;
+}
+
+.MStar .MStarTips {
+    float: left;
+    padding-left: 10px;
+    color: #999;
+}
+
+.MStar .MStarIco span {
+    width: 0;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -169px;
+}
+
+.MStar .MStarL3 span {
+    width: 60px;
+}
+
+.MStar:after {
+    content: '';
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    display: block;
+}
+
+
+.more_notes a {
+    font-size: 18px;
+    color: #999;
+}
+
+.more_notes strong {
+    color: #ff8a00;
+    font-weight: normal;
+    font-family: Arial;
+    margin: 0 5px;
+    font-size: 32px;
+    position: relative;
+    top: 2px;
+}
+
+.dp_word {
+    line-height: 24px;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.dp_pics {
+    margin-top: 15px;
+}
+
+.dp_comment {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.MInfoNum i {
+    display: inline-block;
+    background-image: url(../images/ico_sprite_v8.png);
+    background-position: 0 -124px;
+    width: 18px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.MInfoNum .MIcoComment {
+    background-position: -20px -124px;
+}
+
+.dp_comment span {
+    vertical-align: middle;
+}
+
+.dp_comment strong {
+    font-weight: normal;
+}

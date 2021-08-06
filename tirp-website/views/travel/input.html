@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/addtravelnote.css" rel="stylesheet" type="text/css">
+    <link href="/js/ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <link href="/js/plugins/datepicker/datepicker.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/ueditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/ueditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/plugins/datepicker/datepicker.js"></script>
+    <script src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <link href="/js/plugins/chosen/chosen.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script src="/js/vue/moment.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+    <script type="text/javascript" src="/js/system/travel/input.js"></script>
+
+    <script>
+        function uploadPic() {
+            var url = domainUrl + "/coverImageUpload";
+            if ($("#coverBtn").val()) {
+                $("#coverForm").ajaxSubmit({
+                    url: url,
+                    type: "post",
+                    success: function (data) {
+                        $("#choseBtn").html(" + 选择封面");
+                        $("#coverImage").attr("src", data);
+                        $("#coverValue").val(data);
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "travel";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+
+<!--文件上传-->
+<form method="post" id="coverForm" enctype="multipart/form-data">
+    <input type="file" name="pic" id="coverBtn" style="display: none;" onchange="uploadPic()">
+</form>
+
+
+<div class="wrapper" id="app" v-cloak>
+    <div class="ap-head">
+        <h1>发表新话题/文章</h1>
+        <dl d-data="1" class="on">
+            <dt>游记</dt>
+            <dd>关联至具体的旅行目的地</dd>
+        </dl>
+        <dl d-data="2" class="">
+            <dt>随笔</dt>
+            <dd>只在我的骡窝窝显示</dd>
+        </dl>
+        <div class="clearfix"></div>
+    </div>
+    <div class="ap-wrap">
+        <div class="ap-main">
+            <form class="forms" action="/travel/saveOrUpdate" method="post" id="editForm">
+                <input type="hidden" name="id" :value="tv.id">
+                <input type="hidden" name="state" id="state">
+
+                <dl class="title cf">
+                    <dd>
+                        <!--<label class="" style="display: block;">请在这里输入标题</label>-->
+                        <span class="char-limit _j_char_limit hide">可输入<strong>48</strong>字</span>
+                        <input id="title" name="title" type="text" maxlength="48" :value="tv.title"
+                               placeholder="请在这里输入标题">
+                    </dd>
+                </dl>
+                <dl>
+                    <dd>
+                        <div class="chose_pic" @click="chosePic()">
+                            <img :src="tv.coverUrl" id="coverImage" class="chose_pic"><span class="choseBtn"
+                                                                                            id="choseBtn">+ 选择封面</span>
+                            <input type="hidden" name="coverUrl" id="coverValue" :value="tv.coverUrl">
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dd>
+                        <div class="pi-base">
+                            <div class="pi-row">
+                                <div class="pi-col pi-date"><label>出发时间</label> <input
+                                        class="pi-input _j_dateinput hasDatepicker" type="text" name="travelTime"
+                                        style="z-index: 551; position: relative;margin-right: 10px;"
+                                        data-toggle="datepicker" :value="tv.travelTime|dateFormat">
+                                </div>
+                                <div class="pi-col pi-person"><label>人物</label>
+                                    <div class="pi-dropdown _j_piDrop">
+
+                                        <select name="person" data-placeholder="选择出行人物" style="width: 150px;"
+                                                :value="tv.person">
+                                            <option value="-1">--请选择--</a></option>
+                                            <option value="1">一个人</a></option>
+                                            <option value="2">情侣/夫妻</a></option>
+                                            <option value="3">带孩子</a></option>
+                                            <option value="4">家庭出游</a></option>
+                                            <option value="5"> 和朋友</a></option>
+                                            <option value="6">和同学</a></option>
+                                            <option value="7">其它</a></option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="pi-col pi-date" style="margin-left: 2%;"><label for="isopen">是否公开</label>
+                                    <input class="pi-input" style="margin-top: 13px;width:15px; height: 15px;"
+                                           name="ispublic" value=1
+                                           type="checkbox" id="isopen" :checked="tv.ispublic==1"/>
+                                </div>
+                            </div>
+                            <div class="pi-row">
+                                <div class="pi-col pi-day"><label>出行天数</label>
+                                    <input id="days" style="margin-right: 10px;" class="pi-input" type="text"
+                                           placeholder="输入天数" name="day" :value="tv.day">
+                                </div>
+                                <div class="pi-col pi-day"><label>人均花费/RMB</label>
+                                    <input id="expense" class="pi-input" type="text" placeholder="输入花费" name="perExpend"
+                                           :value="tv.perExpend">
+                                </div>
+                                <div class="pi-col pi-date" style="margin-left: 2%;"><label for="isopen">旅游地点</label>
+                                    <div class="pi-dropdown " style="text-align: left">
+                                        <select name="destId" data-placeholder="请选择目的地" id="region"
+                                                style="width: 150px;">
+                                            <option v-for="d in dests" :value="d.id"
+                                                    :selected="tv.destId == d.id"
+                                            >{{d.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="title cf">
+                    <dd>
+                        <input name="summary" type="text" :value="tv.summary" placeholder="请在这里输入摘要">
+                    </dd>
+                </dl>
+                <dl class="body cf">
+                    <dd id="content_div">
+                        <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+                    </dd>
+                </dl>
+                <div class="btns">
+                    <div class="accept_pact">
+                        <input type="checkbox" checked="">
+                        我已阅读并同意<a href="javascript:;" title="《骡窝窝游记协议》" target="_blank">《骡窝窝游记协议》</a>
+                    </div>
+                    <input class="btn_submit" value="发表" type="button" @click="saveOrUpdate(1)">
+                    <div class="cont">或者</div>
+                    <input class="btn_save" value="保存草稿" type="button" @click="saveOrUpdate(0)">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/travel/input.js"></script>
+</html>
