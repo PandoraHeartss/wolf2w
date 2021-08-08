@@ -3,6 +3,7 @@ package cn.wolfcode.wolf2w.redis.impl;
 import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.Consts;
+import cn.wolfcode.wolf2w.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,13 @@ public class UserInfoRedisServiceImpl implements IUserInfoRedisService {
      */
     @Override
     public void setVerifyCode(String phone, String code) {
-        String key = "verify_code" + phone; //key要保证唯一 可读  灵活 失效
+
+        String key = RedisKey.VERIFY_CODE.join(phone);
+        //String key = "verify_code" + phone; //key要保证唯一 可读  灵活 失效
         String value = code;
 
         //参数1：key， 参数2：value,参数3：失效时间，参数4：时间单位
-        templates.opsForValue().set(key, value, Consts.VERIFY_CODE_VAI_TIME * 60L, TimeUnit.SECONDS);
+        templates.opsForValue().set(key, value, RedisKey.VERIFY_CODE.getTime(), TimeUnit.SECONDS);
     }
 
 
@@ -44,7 +47,8 @@ public class UserInfoRedisServiceImpl implements IUserInfoRedisService {
     @Override
     public String getVerifyCode(String phone) {
 
-        String code = templates.opsForValue().get("verify_code" + phone);
+        //String code = templates.opsForValue().get("verify_code" + phone);
+        String code = templates.opsForValue().get(RedisKey.VERIFY_CODE.join(phone));
         return code;
     }
 }
