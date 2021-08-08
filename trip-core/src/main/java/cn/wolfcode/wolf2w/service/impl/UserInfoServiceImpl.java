@@ -3,11 +3,16 @@ package cn.wolfcode.wolf2w.service.impl;
 import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.mapper.UserInfoMapper;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
+import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
+
+import cn.wolfcode.wolf2w.util.Consts;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 /**
  * 自定义mybatis-plus 服务层接口实现类
@@ -16,9 +21,14 @@ import org.springframework.stereotype.Service;
  * 3> 继承通用接口IService实现类 ServiceImpl
  * 指定2个泛型: 1. 操作实体类mapper接口  2.操作实体对象类型:UserInfo
  */
+
+
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
 
+
+    @Autowired
+    private IUserInfoRedisService userInfoRedisService;
 
     /*
      * @Description: 查询输入的手机号是否已被注册
@@ -35,5 +45,26 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         wrapper.eq("phone", phone);
 
         return super.getOne(wrapper) != null;
+    }
+
+
+    /*
+     * @Description: 短信发送的业务逻辑实现
+     * @param: phone 手机号码
+     * @return void
+     * @author PandoraHearts
+     * @date 2021/8/8 10:34
+     */
+    @Override
+    public void sendVerifyCode(String phone) {
+        //用UUID创建短信验证码
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        //拼接短信
+        StringBuffer sb = new StringBuffer();
+        String letter = sb.append("您的短信验证码是：").append(uuid).append(",请在").append(Consts.VERIFY_CODE_VAI_TIME).append("分钟内登录！").toString();
+        //发送短信（这里先假装发送了短信）
+        System.out.println(letter);
+        //调用redis的业务方法，缓存短信到redis中去
+        userInfoRedisService.setVerifyCode(phone, uuid);
     }
 }
