@@ -21,4 +21,29 @@ public interface IUserInfoService extends IService<UserInfo> {
      * @date 2021/8/6 16:31
      */
     Boolean checkPhone(String phone);
+
+
+    /*
+     * @Description: 短信发送的接口
+     * @param: phone 手机号
+     * @return void
+     * @author PandoraHearts
+     * @date 2021/8/8 10:32
+     */
+    void sendVerifyCode(String phone);
+
+
+    /*
+     * @Description: 注册的业务接口
+     * @param: phone 手机号码
+     * @param: nickname 昵称
+     * @param: password 密码
+     * @param: rpassword 确认密码
+     * @param: verifyCode 验证码
+     * @return void
+     * @author PandoraHearts
+     * @date 2021/8/8 15:05
+     */
+    void regist(String phone, String nickname, String password, String rpassword, String verifyCode);
+
 }
