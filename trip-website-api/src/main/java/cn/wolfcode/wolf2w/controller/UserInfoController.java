@@ -1,5 +1,6 @@
 package cn.wolfcode.wolf2w.controller;
 
+import cn.wolfcode.wolf2w.exception.LogicException;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,19 +61,32 @@ public class UserInfoController {
      * @author PandoraHearts
      * @date 2021/8/8 15:01
      */
+//    @PostMapping("/regist")
+//    public Object regist(String phone, String nickname, String password, String rpassword, String verifyCode) {
+//
+//        try {
+//            //调用注册的业务方法
+//            userInfoService.regist(phone, nickname, password, rpassword, verifyCode);
+//        } catch (LogicException e) {
+//            //此操作存在问题：给用户看的异常可以抓到，但是系统级别的异常一样可以抓到，而项目开发是不允许给用户看到系统异常的
+//            //所以如何区分系统异常，用户异常
+//
+//            //解决方案：抓用户异常，剩下的都是系统异常
+//            //思考：怎样区分用户异常跟系统异常，使用自定义异常表示用户异常，剩下都是系统异常
+//            e.printStackTrace();
+//            return JsonResult.error(JsonResult.CODE_ERROR, JsonResult.MSG_ERROR, null);
+//        } catch (Exception e) {
+//            return JsonResult.defaultError();
+//        }
+//        return JsonResult.success();
+//    }
+
+
+    //区分 用户异常和系统异常 优化后
     @PostMapping("/regist")
     public Object regist(String phone, String nickname, String password, String rpassword, String verifyCode) {
-
-        try {
-            //调用注册的业务方法
-            userInfoService.regist(phone, nickname, password, rpassword, verifyCode);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return JsonResult.error(JsonResult.CODE_ERROR, JsonResult.MSG_ERROR, null);
-        }
-
+        userInfoService.regist(phone, nickname, password, rpassword, verifyCode);
         return JsonResult.success();
     }
-
 
 }

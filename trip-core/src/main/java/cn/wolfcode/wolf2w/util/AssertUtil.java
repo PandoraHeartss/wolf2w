@@ -1,9 +1,6 @@
 package cn.wolfcode.wolf2w.util;
-
-
 import cn.wolfcode.wolf2w.exception.LogicException;
 import org.springframework.util.StringUtils;
-
 /**
  * 参数断言工具类
  */
@@ -20,7 +17,7 @@ public class AssertUtil {
      */
     public static void hasLength(String value, String msg) {
         if (!StringUtils.hasLength(value)) {
-            throw new RuntimeException(msg);
+            throw new LogicException(msg);
         }
     }
 
@@ -33,10 +30,10 @@ public class AssertUtil {
      */
     public static void isEquals(String v1, String v2, String msg) {
         if (v1 == null || v2 == null) {
-            throw new RuntimeException("输入参数数不能为null");
+            throw new LogicException("输入参数数不能为null");
         }
         if (!v1.equals(v2)) {
-            throw new RuntimeException(msg);
+            throw new LogicException(msg);
         }
     }
 }
