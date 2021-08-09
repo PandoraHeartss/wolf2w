@@ -1,10 +1,15 @@
 package cn.wolfcode.wolf2w.controller;
 
+import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.exception.LogicException;
+import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("users")
@@ -87,6 +92,14 @@ public class UserInfoController {
     public Object regist(String phone, String nickname, String password, String rpassword, String verifyCode) {
         userInfoService.regist(phone, nickname, password, rpassword, verifyCode);
         return JsonResult.success();
+    }
+
+
+    //登录 功能
+    @PostMapping("login")
+    public Object login(String username, String password) {
+        Map<String, String> map = userInfoService.login(username, password);
+        return JsonResult.success(map);
     }
 
 }

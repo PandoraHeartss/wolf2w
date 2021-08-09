@@ -3,6 +3,8 @@ package cn.wolfcode.wolf2w.service;
 import cn.wolfcode.wolf2w.domain.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 
 /**
  * mybatis-plus service 层接口定义规则:
@@ -46,4 +48,14 @@ public interface IUserInfoService extends IService<UserInfo> {
      */
     void regist(String phone, String nickname, String password, String rpassword, String verifyCode);
 
+
+    /*
+     * @Description: 根据用户名和密码判断是否可以登录
+     * @param: username 用户名
+     * @param: password 密码
+     * @return 返回一个user对象
+     * @author PandoraHearts
+     * @date 2021/8/9 8:34
+     */
+    Map<String, String> login(String username, String password);
 }

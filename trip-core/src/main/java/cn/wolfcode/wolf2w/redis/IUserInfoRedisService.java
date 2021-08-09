@@ -1,5 +1,7 @@
 package cn.wolfcode.wolf2w.redis;
 
+import cn.wolfcode.wolf2w.domain.UserInfo;
+
 //redis 相关接口
 public interface IUserInfoRedisService {
 
@@ -16,9 +18,11 @@ public interface IUserInfoRedisService {
     /*
      * @Description: 根据手机号码获取之前存进去的验证码
      * @param: phone 手机号码
-     * @return java.lang.String
+     * @return 返回验证码
      * @author PandoraHearts
      * @date 2021/8/8 15:36
      */
     String getVerifyCode(String phone);
+
+
 }

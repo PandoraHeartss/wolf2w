@@ -1,19 +1,25 @@
 package cn.wolfcode.wolf2w.service.impl;
 
 import cn.wolfcode.wolf2w.domain.UserInfo;
+import cn.wolfcode.wolf2w.exception.LogicException;
 import cn.wolfcode.wolf2w.mapper.UserInfoMapper;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.AssertUtil;
 import cn.wolfcode.wolf2w.util.Consts;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 自定义mybatis-plus 服务层接口实现类
@@ -27,6 +33,9 @@ import java.util.UUID;
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
 
+
+    @Autowired
+    private StringRedisTemplate template;
 
     @Autowired
     private IUserInfoRedisService userInfoRedisService;
@@ -116,5 +125,44 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         userInfo.setPassword(password);
         userInfo.setState(UserInfo.STATE_NORMAL);
         super.save(userInfo);
+    }
+
+
+    /*
+     * @Description: 根据用户名和密码判断是否可以登录
+     * 用uuid创建token
+     * 以token为key , userInfo对象为key 存入Redis中
+     * 并设置失效时间30分钟
+     * @param: username 用户名
+     * @param: password 密码
+     * @return 把token，和 value 封装到一个map里并返回
+     * @author PandoraHearts
+     * @date 2021/8/9 8:36
+     */
+    @Override
+    public Map<String, String> login(String username, String password) {
+        QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
+        wrapper.eq("username", password)
+                .eq("password", password);
+
+        //先根据用户名密码查询得到userInfo对象
+        UserInfo userInfo = super.getOne(wrapper);
+        //判断是否存在userInfo对象
+        if (userInfo == null) {
+            //没有userInfo对象则抛出用户异常
+            throw new LogicException("账号或者密码错误！");
+        }
+
+        // 如果userInfo对象存在，用uuid创建token，以token为key , userInfo对象为key 存入Redis中
+        String token = UUID.randomUUID().toString().replace("-", "");
+        String user = JSON.toJSONString(userInfo);
+        template.opsForValue().set(token, user, Consts.USER_INFO_TOKEN_VAI_TIME * 60, TimeUnit.SECONDS);
+
+        //把token，和 value 封装到一个map里并返回,作为JsonResult内success方法的参数
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        map.put("userInfo", user);
+
+        return map;
     }
 }

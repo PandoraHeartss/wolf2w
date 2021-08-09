@@ -1,5 +1,6 @@
 package cn.wolfcode.wolf2w.redis.impl;
 
+import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.Consts;
@@ -46,9 +47,10 @@ public class UserInfoRedisServiceImpl implements IUserInfoRedisService {
      */
     @Override
     public String getVerifyCode(String phone) {
-
         //String code = templates.opsForValue().get("verify_code" + phone);
         String code = templates.opsForValue().get(RedisKey.VERIFY_CODE.join(phone));
         return code;
     }
+
+
 }
