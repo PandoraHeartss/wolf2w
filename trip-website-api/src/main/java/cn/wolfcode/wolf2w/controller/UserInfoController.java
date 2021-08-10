@@ -95,10 +95,12 @@ public class UserInfoController {
     }
 
 
-    //登录 功能
+    //令牌登录流程的第一次请求
     @PostMapping("login")
     public Object login(String username, String password) {
         Map<String, String> map = userInfoService.login(username, password);
         return JsonResult.success(map);
     }
+
+
 }
