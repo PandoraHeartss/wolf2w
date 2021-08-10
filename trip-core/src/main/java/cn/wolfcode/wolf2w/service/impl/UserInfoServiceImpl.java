@@ -142,7 +142,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     @Override
     public Map<String, String> login(String username, String password) {
         QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
-        wrapper.eq("username", password)
+        wrapper.eq("phone", username)
                 .eq("password", password);
 
         //先根据用户名密码查询得到userInfo对象
