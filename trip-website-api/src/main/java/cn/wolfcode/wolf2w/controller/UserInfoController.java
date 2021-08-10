@@ -101,5 +101,4 @@ public class UserInfoController {
         Map<String, String> map = userInfoService.login(username, password);
         return JsonResult.success(map);
     }
-
 }

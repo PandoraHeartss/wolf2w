@@ -13,7 +13,10 @@ import lombok.Setter;
 public enum RedisKey {
 
     //注册短信验证码
-    VERIFY_CODE("verify_code", Consts.VERIFY_CODE_VAI_TIME * 60L);
+    VERIFY_CODE("verify_code", Consts.VERIFY_CODE_VAI_TIME * 60L),
+
+    //用户第一次登录的时候 要用token作为key
+    USER_LOGIN_TOKEN("user_login_token", Consts.USER_INFO_TOKEN_VAI_TIME * 60L);
 
 
     @Setter

@@ -8,6 +8,7 @@ import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.AssertUtil;
 import cn.wolfcode.wolf2w.util.Consts;
+import cn.wolfcode.wolf2w.util.RedisKey;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -155,13 +156,14 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
         // 如果userInfo对象存在，用uuid创建token，以token为key , userInfo对象为key 存入Redis中
         String token = UUID.randomUUID().toString().replace("-", "");
+        String key = RedisKey.USER_LOGIN_TOKEN.join(token);
         String user = JSON.toJSONString(userInfo);
-        template.opsForValue().set(token, user, Consts.USER_INFO_TOKEN_VAI_TIME * 60, TimeUnit.SECONDS);
+        template.opsForValue().set(key, user, Consts.USER_INFO_TOKEN_VAI_TIME * 60, TimeUnit.SECONDS);
 
         //把token，和 value 封装到一个map里并返回,作为JsonResult内success方法的参数
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        map.put("userInfo", user);
+        map.put("user", user);
 
         return map;
     }
