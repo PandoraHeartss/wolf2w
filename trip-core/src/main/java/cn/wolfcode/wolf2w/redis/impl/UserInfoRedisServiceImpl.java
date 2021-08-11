@@ -3,11 +3,14 @@ package cn.wolfcode.wolf2w.redis.impl;
 import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
 
+import cn.wolfcode.wolf2w.util.AssertUtil;
 import cn.wolfcode.wolf2w.util.Consts;
 import cn.wolfcode.wolf2w.util.RedisKey;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,4 +56,34 @@ public class UserInfoRedisServiceImpl implements IUserInfoRedisService {
     }
 
 
+    /*
+     * @Description: 根据token来查询 Redis中的userInfo对象
+     * 并重新设置失效时间30分钟
+     * @param: token
+     * @return UserInfo
+     * @author PandoraHearts
+     * @date 2021/8/10 22:32
+     */
+    @Override
+    public UserInfo getUserInfoByToken(String token) {
+        //判断是否有拿到token，没有就返回null
+        if (!StringUtils.hasText(token)) {
+            return null;
+        }
+        //先用token拿到之前设置的RedisKey
+        String key = RedisKey.USER_LOGIN_TOKEN.join(token);
+
+        //判断是否有key，没有就返回null
+        if (templates.hasKey(key)) {
+            //如果有key，再拿到 存在Redis中的userInfo对象对应的字符串
+            String UserStr = templates.opsForValue().get(key);
+            //调用断言工具类，userInfo对象为空则抛出异常
+            AssertUtil.hasLength(UserStr, "并没有用户登录");
+            UserInfo userInfo = JSON.parseObject(UserStr, UserInfo.class);
+            //重新设置30分钟的失效时间
+            templates.expire(key, RedisKey.USER_LOGIN_TOKEN.getTime(), TimeUnit.SECONDS);
+            return userInfo;
+        }
+        return null;
+    }
 }

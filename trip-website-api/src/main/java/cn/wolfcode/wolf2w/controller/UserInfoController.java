@@ -8,7 +8,7 @@ import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
@@ -18,6 +18,9 @@ public class UserInfoController {
 
     @Autowired
     private IUserInfoService userInfoService;
+
+    @Autowired
+    private IUserInfoRedisService userInfoRedisService;
 
 
     @GetMapping("/detail")
@@ -96,10 +99,21 @@ public class UserInfoController {
 
 
     //令牌登录流程的第一次请求
-    @PostMapping("login")
+    @PostMapping("/login")
     public Object login(String username, String password) {
         Map<String, String> map = userInfoService.login(username, password);
         return JsonResult.success(map);
+    }
+
+    //令牌登录流程的第二次请求
+    @GetMapping("/currentUser")
+    public Object list(HttpServletRequest request) {
+        //使用request对象获取请求头中的token
+        String token = request.getHeader("token");
+        //根据token来查询 Redis中的userInfo对象
+        UserInfo userInfo = userInfoRedisService.getUserInfoByToken(token);
+
+        return userInfo;
     }
 
 

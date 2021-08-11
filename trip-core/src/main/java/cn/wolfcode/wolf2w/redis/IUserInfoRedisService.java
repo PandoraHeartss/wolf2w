@@ -24,5 +24,12 @@ public interface IUserInfoRedisService {
      */
     String getVerifyCode(String phone);
 
-
+    /*
+     * @Description: 根据token来查询 Redis中的userInfo对象
+     * @param: token
+     * @return UserInfo
+     * @author PandoraHearts
+     * @date 2021/8/10 22:32
+     */
+    UserInfo getUserInfoByToken(String token);
 }
