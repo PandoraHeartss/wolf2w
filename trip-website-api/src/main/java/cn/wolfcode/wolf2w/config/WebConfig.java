@@ -1,8 +1,11 @@
 package cn.wolfcode.wolf2w.config;
 
+import cn.wolfcode.wolf2w.interceptor.CheckLoginInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
@@ -14,10 +17,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2021/8/6 17:20
  */
 @Configuration
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
+
+//    @Autowired
+//    private CheckLoginInterceptor checkLoginInterceptor;
+//
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//            registry.addInterceptor(checkLoginInterceptor)
+//                    .addPathPatterns("/**")
+//                    .excludePathPatterns("users/checkPhone")
+//                    .excludePathPatterns("users/login")
+//                    .addPathPatterns("users/regist")
+//                    .addPathPatterns("users/sendVerifCode");
+//    }
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
+
 
         return new WebMvcConfigurer() {
             @Override
