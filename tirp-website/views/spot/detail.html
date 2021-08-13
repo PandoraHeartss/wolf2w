@@ -50,17 +50,13 @@
             </div>
 
             <div class="mod mod-detail" data-cs-p="概况">
-                <div class="summary">
-                    ·广州塔是广州的地标，塔高600米，为国内第一高塔，可以俯瞰广州全景。<br>
-                    ·其头尾相当，腰身玲珑细长，又有“小蛮腰”之称，到晚上会亮灯，即使不游塔，也可来此拍摄外观。<br>
-                    ·包括摩天轮、珠江摄影观景平台、蜘蛛侠栈道等景点，大部分以观景摄影为主。<br>
-                    ·一般4点半-5点可以到达电视塔顶，观看日落及夜景。
+                <div class="summary" v-bind="content.introduce">
                 </div>
 
                 <ul class="baseinfo clearfix">
                     <li class="tel">
                         <div class="label">电话</div>
-                        <div class="content">020-89338222</div>
+                        <div class="content">{{spot.phone}}</div>
                     </li>
                     <li class="item-site">
                         <div class="label">网址</div>
@@ -69,38 +65,26 @@
                     </li>
                     <li class="item-time">
                         <div class="label">用时参考</div>
-                        <div class="content">1-3小时</div>
+                        <div class="content">{{spot.time}}小时</div>
                     </li>
                 </ul>
 
                 <dl>
                     <dt>交通</dt>
-                    <dd>地铁:乘坐APM线或者3号线至广州塔地铁站，步行即可到达；<br>
-                        公交:乘坐11路、262路、468路、旅游观光1号线至广州塔西站，步行即可到达；<br>
-                        有轨电车:乘坐海珠有轨电车至广州塔站,步行即可到达。
+                    <dd v-bind="content.traffic">
                     </dd>
                 </dl>
                 <dl>
                     <dt>门票</dt>
                     <dd>
-                        <div>
-                            433米白云星空观光票:成人150人民币；<br>
-                            450米塔顶游乐套票:成人228人民币；<br>
-                            460米摩天轮游乐套票:成人298人民币；<br>
-                            488米一塔倾城游乐套票:成人398人民币<br>
-                            半票:1.2米至1.5米儿童实行半票优惠<br>
-                            免票:6周岁及以下或1.2米及以下儿童免票<br>
-
+                        <div v-bind="content.tickets">
                         </div>
+
                     </dd>
                 </dl>
                 <dl>
                     <dt>开放时间</dt>
-                    <dd>
-                        09:30-22:30；停止入场时间:22:00<br>
-                        摩天轮：10:00-22:30；逢周一：15:00-22:30；每月最后一周周一：17:00-22:30。<br>
-                        极速云霄：10:00-22:30；逢周一：12:00-22:30；每月最后一周周一：17:00-22:30。<br>
-                        广州塔实行分时段观光游览，门票以2小时为一个时段。入塔时间为:09:30、12:00、14:00、16:00、20:00
+                    <dd v-bind="content.openingTime">
                     </dd>
                 </dl>
             </div>
