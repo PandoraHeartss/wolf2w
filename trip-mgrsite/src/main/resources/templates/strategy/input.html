@@ -1,0 +1,167 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>攻略编辑</title>
+    <div th:replace="common/header :: header"></div>
+
+    <link type="text/css" rel="stylesheet" href="/js/plugins/uploadifive/uploadifive.css"/>
+    <script type="text/javascript" src="/js/plugins/uploadifive/jquery.uploadifive.min.js"></script>
+
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script>
+        //表单提交验证
+        $(function () {
+            //富文本框图片配置
+            var ck = CKEDITOR.replace('content', {
+                filebrowserBrowseUrl: '/strategy/info',
+                filebrowserUploadUrl: '/uploadImg_ck'
+            });
+            //图片上传
+            $('.imgBtn').uploadifive({
+                'auto': true,  //自动发起图片上传请求
+                'uploadScript': '/uploadImg',   //处理上传文件的请求路径
+                buttonClass: "btn-link",
+                'fileObjName': 'pic',   //上传文件参数名
+                'buttonText': '浏览...',
+                'fileType': 'image',
+                'multi': false,
+                'fileSizeLimit': 5242880,
+                'removeCompleted': true, //取消上传完成提示
+                'uploadLimit': 1,
+                //'queueSizeLimit'  : 10,
+                'overrideEvents': ['onDialogClose', 'onError'],    //onDialogClose 取消自带的错误提示
+                'onUploadComplete': function (file, data) {
+                    $("#imgUrl").attr("src", data);  //data约定是json格式 图片地址
+                    $("#coverUrl").val(data);
+                },
+                onFallback: function () {
+                    $.messager.alert("温馨提示", "该浏览器无法使用!");
+                }
+            });
+            //保存
+            $("#btn_submit").click(function () {
+                //异步提交时， 富文本框可能出问题
+                $("#content").val(ck.getData())
+                $("#editForm").ajaxSubmit(function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        window.location.href = "/strategy/list";
+                    } else {
+                        $.messager.alert("温馨提示", data.msg);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="container-fluid " style="margin-top: 20px">
+    <div th:replace="common/top :: top"></div>
+    <div class="row">
+        <div class="col-sm-2" th:with="currentMenu='strategy'">
+            <div th:replace="common/menu :: menu"></div>
+        </div>
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="page-head-line">攻略编辑</h1>
+                </div>
+            </div>
+            <div class="row col-sm-10">
+                <form class="form-horizontal" action="/strategy/saveOrUpdate" method="post" id="editForm">
+                    <input type="hidden" th:value="${strategy?.id}" name="id">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">标题：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="title" name="title"
+                                   th:value="${strategy?.title}" placeholder="请输入攻略标题">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">副标题：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="subTitle" name="subTitle"
+                                   th:value="${strategy?.subTitle}" placeholder="请输入攻略副标题">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">封面：</label>
+                        <div class="col-sm-8">
+                            <input type="hidden" class="form-control" id="coverUrl" name="coverUrl"
+                                   th:value="${strategy?.coverUrl}">
+                            <img th:src="   ${strategy?.coverUrl} == null?'/images/default.jpg':${strategy?.coverUrl}    "
+                                 width="100px" id="imgUrl">
+                            <button type="button" class="imgBtn">浏览</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类：</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="catalog" name="catalogId">
+                                <option value="-1">--请选择--</option>
+                                <optgroup th:label="${c.destName}" th:each="c:${catalogs}">
+                                    <option th:value="${ml.id}" th:each="ml:${c.catalogList}"
+                                            th:text="${ml.name}"></option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <script>
+                            var value = '[[${strategy?.catalogId}]]'
+                            $("#catalog").val(value);
+                        </script>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">主题：</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="theme" name="themeId">
+                                <option value="-1">--请选择--</option>
+                                <option th:each="t:${themes}" th:value="${t.id}" th:text="${t.name}"></option>
+                            </select>
+
+                            <script>
+                                var value = '[[${strategy?.themeId}]]'
+                                $("#theme").val(value);
+                            </script>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态：</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="state" name="state">
+                                <option value="0">待发布</option>
+                                <option value="1">发布</option>
+                            </select>
+                        </div>
+                        <script>
+                            var value = '[[${strategy?.state}]]'
+                            $("#state").val(value);
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">摘要：</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="summary" th:text="${strategy?.summary}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="content" name="content.content" class="ckeditor"
+                                  th:text="${strategy?.content?.content}"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-8">
+                            <button id="btn_submit" class="btn btn-primary" type="button">保存</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

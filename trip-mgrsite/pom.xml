@@ -10,8 +10,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+
     <artifactId>trip-mgrsite</artifactId>
     <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>cn.wolfcode.wolf2w</groupId>
+            <artifactId>trip-core</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>

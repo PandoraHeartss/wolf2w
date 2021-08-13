@@ -1,0 +1,26 @@
+<div th:fragment="page" style="text-align: center;">
+    <ul id="pagination" class="pagination"></ul>
+    <script>
+        //分页
+        $(function () {
+            var totalPages = [[${page.pages}]]
+            var startPage = [[${page.current}]]
+
+            $("#pagination").twbsPagination({
+                totalPages: totalPages || 1,
+                startPage: startPage || 1,
+                visiblePages: 5,
+                first: "首页",
+                prev: "上页",
+                next: "下页",
+                last: "尾页",
+                initiateStartPageClick: false,
+                onPageClick: function (event, page) {
+                    $("#currentPage").val(page);
+                    $("#searchForm").submit();
+                }
+            });
+        })
+    </script>
+</div>
+
