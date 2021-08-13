@@ -9,15 +9,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 区域服务接口实现
+ */
 @Service
+@Transactional
 public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> implements IRegionService {
     @Override
     public Page<Region> queryPage(RegionQuery qo) {
 
-        QueryWrapper wrapper = new QueryWrapper();
+        QueryWrapper<Region> wrapper = new QueryWrapper<>();
         Page<Region> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
-        super.page(page, wrapper);
         return super.page(page, wrapper);
     }
 }
