@@ -10,4 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class DestinationQuery extends QueryObject {
+
+    private Long parentId;//父id
+
 }

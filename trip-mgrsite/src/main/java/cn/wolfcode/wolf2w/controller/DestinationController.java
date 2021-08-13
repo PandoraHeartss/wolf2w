@@ -26,8 +26,13 @@ public class DestinationController {
 
     @RequestMapping("/list")
     public String list(Model model, @ModelAttribute("qo") DestinationQuery qo) {
+        //分页
         IPage<Destination> page = destinationService.queryPage(qo);
         model.addAttribute("page", page);
+        //吐司查询
+        List<Destination> toasts = destinationService.queryToastsByParentId(qo.getParentId());
+        model.addAttribute("toasts", toasts);
+
         return "destination/list";
     }
 
@@ -50,4 +55,6 @@ public class DestinationController {
         destinationService.removeById(id);
         return JsonResult.success();
     }
+
+
 }
