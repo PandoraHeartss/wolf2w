@@ -61,4 +61,36 @@ public class RegionController {
         return JsonResult.success();
     }
 
+
+    /*
+     * @Description: 根据区域id 和 热门参数 更改
+     * @param: id 区域id
+     * @param: hot 热门参数
+     * @return java.lang.Object
+     * @author PandoraHearts
+     * @date 2021/8/13 16:44
+     */
+    @RequestMapping("/changeHotValue")
+    @ResponseBody
+    public Object changeHotValue(Long id, int hot) {
+        regionService.changeHotValue(id, hot);
+        return JsonResult.success();
+    }
+
+
+    /*
+     * @Description: 据区域id查找出 对应的目的地集合
+     * @param: rid
+     * @return java.lang.Object
+     * @author PandoraHearts
+     * @date 2021/8/13 17:15
+     */
+    @RequestMapping("/getDestByRegionId")
+    @ResponseBody
+    public Object getDestByRegionId(Long rid) {
+        List<Destination> list = destinationService.getDestByRegionId(rid);
+        return list;
+    }
+
+
 }
