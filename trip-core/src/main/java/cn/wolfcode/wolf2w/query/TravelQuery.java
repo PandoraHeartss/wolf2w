@@ -10,4 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class TravelQuery extends QueryObject {
+
+    private Long destId;
+
 }

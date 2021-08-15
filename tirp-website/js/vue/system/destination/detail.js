@@ -55,34 +55,6 @@ var vue = new Vue({
             buildPage(vue.page.current, vue.page.pages, vue.doPage);
         })
 
-
-        /* //吐司
-         ajaxGet("/destinations/toasts", {destId:param.id}, function (data) {
-             var list = data.data;  //中国  广东  广州
-             vue.dest = list.pop();  //数组弹出最后一个
-             vue.toasts = list;
-         })
-
-
-         //概况  : List<StrategyCatalog> list
-         ajaxGet("/destinations/catalogs", {destId:param.id}, function (data) {
-             _this.catalogs = data.data;
-         })
-
-
-         //点击量前3攻略
-         ajaxGet("/destinations/strategies/viewnumTop3", {destId:param.id}, function (data) {
-             _this.strategies = data.data;
-         })
-
-
-         //游记分页
-         ajaxGet("/travels/query", {destId:param.id}, function (data) {
-             _this.page = data.data;
-             buildPage(vue.page.current, vue.page.pages,vue.doPage);
-         })*/
-
-
     }
 });
 

@@ -33,6 +33,7 @@ public class TravelServiceImpl extends ServiceImpl<TravelMapper, Travel> impleme
     public IPage<Travel> queryPage(TravelQuery qo) {
         IPage<Travel> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper<Travel> wrapper = Wrappers.<Travel>query();
+        wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId());
         super.page(page, wrapper);
 
         for (Travel record : page.getRecords()) {
