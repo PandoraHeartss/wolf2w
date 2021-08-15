@@ -47,10 +47,8 @@ public class DestinationServiceImpl extends ServiceImpl<DestinationMapper, Desti
     public List<Destination> getDestByRegionId(Long rid) {
         //根据区域id查询出 对应的区域对象
         Region region = regionService.getById(rid);
-
         //从 区域对象拿到  该对象下挂载的目的地id
         List<Long> list = region.parseRefIds();
-
         //用目的地id查出 对应的 目的地集合
         return super.listByIds(list);
     }
@@ -65,13 +63,15 @@ public class DestinationServiceImpl extends ServiceImpl<DestinationMapper, Desti
      */
     @Override
     public List<Destination> queryToastsByParentId(Long parentId) {
-
         List<Destination> list = new ArrayList<>();
-        toasts(list, parentId);
-        Collections.reverse(list);
+        //方案1： while循环 循环到parentId = null
+        //方案2： 递归 (一般不在重写方法里写，要另起一个方法来被调用)
+        toasts(list, parentId);//a b c
+        Collections.reverse(list);//a b c ---> c b a
         return list;
 
     }
+
 
     //递归吐司查询，给上面的方法调用
     public void toasts(List<Destination> list, Long parentId) {

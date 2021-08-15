@@ -39,4 +39,5 @@ public interface IDestinationService extends IService<Destination> {
      */
     List<Destination> queryToastsByParentId(Long parentId);
 
+
 }

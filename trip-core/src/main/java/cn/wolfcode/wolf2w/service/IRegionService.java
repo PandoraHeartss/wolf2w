@@ -31,4 +31,13 @@ public interface IRegionService extends IService<Region> {
     void changeHotValue(Long id, int hot);
 
 
+    /*
+     * @Description: 查询热门区域列表
+     * @param:
+     * @return java.util.List<cn.wolfcode.wolf2w.domain.Destination>
+     * @author PandoraHearts
+     * @date 2021/8/14 0:51
+     */
+    List<Region> queryHotRegion();
+
 }

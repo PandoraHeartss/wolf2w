@@ -46,4 +46,19 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
         super.update(wrapper);
     }
 
+    /*
+     * @Description: 查询热门区域列表
+     * @param:
+     * @return java.util.List<cn.wolfcode.wolf2w.domain.Destination>
+     * @author PandoraHearts
+     * @date 2021/8/14 0:51
+     */
+    @Override
+    public List<Region> queryHotRegion() {
+        QueryWrapper<Region> wrapper = new QueryWrapper<>();
+        wrapper.eq("ishot", Region.STATE_HOT);
+        wrapper.orderByDesc("seq");
+        return super.list(wrapper);
+    }
+
 }

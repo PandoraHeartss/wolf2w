@@ -40,31 +40,24 @@ var vue = new Vue({
     },
     //数据初始化位置
     mounted: function () {
+
         //热门数据
         var _this = this;
-        ajaxGet("/destinations/hotRegion", {}, function (data) {
+        ajaxGet("/destination/hotRegion", {}, function () {
             _this.regions = data.data;
         })
 
-        //通过区域id查询目的地
-        this.queryRegion(-1);
+
+        /*        //热门数据
+                var _this = this;
+                ajaxGet("/destinations/hotRegion", {}, function (data) {
+                    _this.regions = data.data;
+                })
+
+                //通过区域id查询目的地
+                this.queryRegion(-1);*/
 
 
-        /* ajaxGet("/destinations/hotRegion", {}, function (data) {
-             _this.regions = data.data;
-         })
-
-         //通过区域id查询目的地
-         this.queryRegion(-1);*/
-
-
-        //var _this  = this;
-        // ajaxGet("/destinations/hotRegion", {}, function (data) {
-        //_this .regions = data.data;
-        //})
-
-        //通过区域id查询目的地
-        //this.queryRegion(-1);
     }
 });
 
