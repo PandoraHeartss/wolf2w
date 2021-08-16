@@ -1,6 +1,7 @@
 package cn.wolfcode.wolf2w.service.impl;
 
 import cn.wolfcode.wolf2w.domain.Travel;
+import cn.wolfcode.wolf2w.domain.TravelCondition;
 import cn.wolfcode.wolf2w.exception.LogicException;
 import cn.wolfcode.wolf2w.mapper.TravelMapper;
 import cn.wolfcode.wolf2w.mapper.UserInfoMapper;
@@ -14,6 +15,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -34,7 +36,35 @@ public class TravelServiceImpl extends ServiceImpl<TravelMapper, Travel> impleme
         IPage<Travel> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper<Travel> wrapper = Wrappers.<Travel>query();
         wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId());
+
+        //按月份的范围查询
+        TravelCondition travelTime = TravelCondition.TIMEMAP.get(qo.getTravelTimeType());
+        if (travelTime != null) {
+            wrapper.ge("MONTH(travel_time)", travelTime.getMin())
+                    .le("MONTH(travel_time)", travelTime.getMax());
+        }
+
+
+        //按人均消费的范围查询
+        TravelCondition consumeMap = TravelCondition.CONSUMEMAP.get(qo.getConsumeType());
+        if (consumeMap != null) {
+            wrapper.ge("avg_consume", consumeMap.getMin())
+                    .le("avg_consume", consumeMap.getMax());
+        }
+
+
+        //按 出行天数的范围查询
+        TravelCondition dayMap = TravelCondition.DAYMAP.get(qo.getDayType());
+        if (dayMap != null) {
+            wrapper.ge("avg_consume", dayMap.getMin())
+                    .le("avg_consume", dayMap.getMax());
+        }
+
+        //排序
+        wrapper.orderByDesc(StringUtils.hasText(qo.getOrderBy()), qo.getOrderBy());
+
         super.page(page, wrapper);
+
 
         for (Travel record : page.getRecords()) {
             record.setAuthor(userInfoMapper.selectById(record.getAuthorId()));

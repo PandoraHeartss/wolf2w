@@ -13,4 +13,12 @@ public class TravelQuery extends QueryObject {
 
     private Long destId;
 
+    private String orderBy = "create_time";  //排序
+
+    private int travelTimeType = -1; //旅游时间
+
+    private int consumeType = -1; //人均消费
+
+    private int dayType = -1; //·旅游天数
+
 }

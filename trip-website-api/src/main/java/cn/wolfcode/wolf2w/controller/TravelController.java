@@ -17,7 +17,6 @@ public class TravelController {
     @Autowired
     private ITravelService travelService;
 
-
     @GetMapping("/query")
     public Object queryPage(TravelQuery qo) {
         IPage<Travel> page = travelService.queryPage(qo);
