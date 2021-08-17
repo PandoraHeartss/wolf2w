@@ -138,17 +138,22 @@ var vue = new Vue({
             vue.strategies = data.data;
         })
 
-        //游记
-        ajaxGet("/travels/detail", {id: param.id}, function (data) {
-            _this.detail = data.data;
-            _this.content = data.data.content
-        })
-
 
         //游记点击量前3
         ajaxGet("/destinations/travels/viewnumTop3", {destId: param.destId}, function (data) {
             _this.travels = data.data;
         })
+
+
+        //游记
+        ajaxGet("/travels/detail", {id: param.id}, function (data) {
+            _this.detail = data.data;
+            _this.content = data.data.content
+
+            console.log(_this.detail);
+
+        })
+
 
         //游记评论不分页
         this.queryComments(param.id);
