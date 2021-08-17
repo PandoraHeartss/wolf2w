@@ -20,10 +20,20 @@
         //     console.log(data);
         // })
 
-
         ajaxGet("/users/currentUser", {}, function (date) {
             console.log(data);
         })
+
+
+        ajaxGet("/travels/info", {}, function (date) {
+            console.log(data, 1);
+        })
+
+
+        ajaxGet("/travels/updateInfo", {nickname: "xiaofei"}, function (date) {
+            console.log(data, 2);
+        })
+
 
         // //需求：发起ajax请求,请求接口：/users/currentUser  ,从接口中获取当前登录的用户信息
         // //思考，在这个地方怎么传token到后端？
