@@ -12,6 +12,9 @@ import lombok.Setter;
 @Getter
 public enum RedisKey {
 
+    //攻略统计vo key，-1表示不设置超时
+    STRATEGY_STATIS_VO("strategy_statis_vo", -1L),
+
     //注册短信验证码
     VERIFY_CODE("verify_code", Consts.VERIFY_CODE_VAI_TIME * 60L),
 

@@ -118,13 +118,14 @@ var vue = new Vue({
             if (user) {
                 _this.queryUserFavor(param.id, user.id);
             }
+            //统计数据
+            _this.queryStatisVo(param.id);
+
         })
 
         //攻略评论分页
         this.commentPage(1, param.id);
 
-        //统计数据
-        _this.queryStatisVo(param.id);
 
 
     }

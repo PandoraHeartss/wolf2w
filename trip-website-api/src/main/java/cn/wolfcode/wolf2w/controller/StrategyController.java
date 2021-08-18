@@ -3,6 +3,8 @@ package cn.wolfcode.wolf2w.controller;
 import cn.wolfcode.wolf2w.domain.Strategy;
 import cn.wolfcode.wolf2w.domain.StrategyContent;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
+import cn.wolfcode.wolf2w.redis.service.IStrategyStatisVOService;
+import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVO;
 import cn.wolfcode.wolf2w.service.impl.StrategyServiceImpl;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class StrategyController {
 
     @Autowired
     private StrategyServiceImpl strategyService;
+    @Autowired
+    private IStrategyStatisVOService strategyStatisVOService;
 
 
     @GetMapping("/content")
@@ -28,6 +32,9 @@ public class StrategyController {
     @GetMapping("/detail")
     public JsonResult detail(@RequestParam("id") Long strategyId) {
         Strategy strategy = strategyService.queryStrategyByStrategyId(strategyId);
+        //阅读数+1
+        strategyStatisVOService.viewnumIncr(strategyId);
+
         return JsonResult.success(strategy);
     }
 
@@ -58,5 +65,13 @@ public class StrategyController {
     @GetMapping("/condition")
     public JsonResult condition(Integer type) {
         return null;
+    }
+
+
+    //获取vo对象，用于统计数据的回显
+    @GetMapping("/statisVo")
+    public JsonResult getStatisVo(Long sid) {
+        StrategyStatisVO vo = strategyStatisVOService.getStatisVo(sid);
+        return JsonResult.success(vo);
     }
 }
