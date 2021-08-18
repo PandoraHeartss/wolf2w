@@ -1,8 +1,7 @@
 package cn.wolfcode.wolf2w.controller;
 
 import cn.wolfcode.wolf2w.domain.UserInfo;
-import cn.wolfcode.wolf2w.exception.LogicException;
-import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
+import cn.wolfcode.wolf2w.redis.service.IUserInfoRedisService;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

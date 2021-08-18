@@ -1,10 +1,9 @@
-package cn.wolfcode.wolf2w.redis.impl;
+package cn.wolfcode.wolf2w.redis.service.impl;
 
 import cn.wolfcode.wolf2w.domain.UserInfo;
-import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
+import cn.wolfcode.wolf2w.redis.service.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.AssertUtil;
-import cn.wolfcode.wolf2w.util.Consts;
 import cn.wolfcode.wolf2w.util.RedisKey;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;

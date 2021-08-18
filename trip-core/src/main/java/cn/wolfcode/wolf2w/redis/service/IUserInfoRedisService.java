@@ -1,4 +1,4 @@
-package cn.wolfcode.wolf2w.redis;
+package cn.wolfcode.wolf2w.redis.service;
 
 import cn.wolfcode.wolf2w.domain.UserInfo;
 

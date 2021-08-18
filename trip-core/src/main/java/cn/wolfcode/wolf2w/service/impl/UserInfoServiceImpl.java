@@ -4,7 +4,7 @@ import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.exception.LogicException;
 import cn.wolfcode.wolf2w.mapper.UserInfoMapper;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
-import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
+import cn.wolfcode.wolf2w.redis.service.IUserInfoRedisService;
 
 import cn.wolfcode.wolf2w.util.AssertUtil;
 import cn.wolfcode.wolf2w.util.Consts;

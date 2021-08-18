@@ -2,7 +2,7 @@ package cn.wolfcode.wolf2w.resolver;
 
 import cn.wolfcode.wolf2w.annotation.UserParam;
 import cn.wolfcode.wolf2w.domain.UserInfo;
-import cn.wolfcode.wolf2w.redis.IUserInfoRedisService;
+import cn.wolfcode.wolf2w.redis.service.IUserInfoRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
