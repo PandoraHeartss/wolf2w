@@ -1,17 +1,17 @@
 package cn.wolfcode.wolf2w.controller;
 
+import cn.wolfcode.wolf2w.annotation.RequireLogin;
+import cn.wolfcode.wolf2w.annotation.UserParam;
 import cn.wolfcode.wolf2w.domain.Strategy;
 import cn.wolfcode.wolf2w.domain.StrategyContent;
+import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
 import cn.wolfcode.wolf2w.redis.service.IStrategyStatisVOService;
 import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVO;
 import cn.wolfcode.wolf2w.service.impl.StrategyServiceImpl;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("strategies")
@@ -74,4 +74,15 @@ public class StrategyController {
         StrategyStatisVO vo = strategyStatisVOService.getStatisVo(sid);
         return JsonResult.success(vo);
     }
+
+
+    //攻略收藏的实现
+    @RequireLogin
+    @PostMapping("/favor")
+    public Object favor(@UserParam UserInfo user, Long sid) {
+        Boolean favor = strategyStatisVOService.favor(user.getId(), sid);
+        return JsonResult.success(favor);
+    }
+
+
 }

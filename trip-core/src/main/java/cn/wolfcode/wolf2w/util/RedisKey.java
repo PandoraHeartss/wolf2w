@@ -12,6 +12,10 @@ import lombok.Setter;
 @Getter
 public enum RedisKey {
 
+
+    //攻略统计收藏 key，-1表示不设置超时
+    STRATEGY_FAVOR_VO("strategy_favor_vo", -1L),
+
     //攻略统计vo key，-1表示不设置超时
     STRATEGY_STATIS_VO("strategy_statis_vo", -1L),
 

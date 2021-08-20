@@ -116,6 +116,7 @@ var vue = new Vue({
 
             //用户收藏攻略id集合
             if (user) {
+                console.log(user);
                 _this.queryUserFavor(param.id, user.id);
             }
             //统计数据

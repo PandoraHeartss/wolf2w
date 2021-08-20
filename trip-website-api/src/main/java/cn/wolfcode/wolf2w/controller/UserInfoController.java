@@ -1,6 +1,9 @@
 package cn.wolfcode.wolf2w.controller;
 
+import cn.wolfcode.wolf2w.annotation.RequireLogin;
+import cn.wolfcode.wolf2w.annotation.UserParam;
 import cn.wolfcode.wolf2w.domain.UserInfo;
+import cn.wolfcode.wolf2w.redis.service.IStrategyStatisVOService;
 import cn.wolfcode.wolf2w.redis.service.IUserInfoRedisService;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.util.JsonResult;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,6 +24,9 @@ public class UserInfoController {
 
     @Autowired
     private IUserInfoRedisService userInfoRedisService;
+
+    @Autowired
+    private IStrategyStatisVOService strategyStatisVOService;
 
 
     @GetMapping("/detail")
@@ -104,6 +111,7 @@ public class UserInfoController {
         return JsonResult.success(map);
     }
 
+
     //令牌登录流程的第二次请求
     @GetMapping("/currentUser")
     public Object list(HttpServletRequest request) {
@@ -113,6 +121,19 @@ public class UserInfoController {
         UserInfo userInfo = userInfoRedisService.getUserInfoByToken(token);
 
         return userInfo;
+    }
+
+
+    //攻略收藏回显的实现
+    @GetMapping("/strategies/favor")
+    public Object favor(Long sid, @UserParam UserInfo user) {
+        //根据用户id查出收藏的攻略id列表
+        List<Long> sidList = strategyStatisVOService.queryStrategyFavorByUserId(user.getId());
+        //判断该攻略id是否在用户收藏的攻略id列表内
+        //true为显示收藏    false为不显示收藏
+        Boolean ref = sidList.contains(sid);
+
+        return JsonResult.success(ref);
     }
 
 
