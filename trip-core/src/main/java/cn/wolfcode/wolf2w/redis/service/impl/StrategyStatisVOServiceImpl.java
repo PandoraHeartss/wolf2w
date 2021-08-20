@@ -173,6 +173,7 @@ public class StrategyStatisVOServiceImpl implements IStrategyStatisVOService {
     }
 
 
+
     //攻略点赞的实现
     @Override
     public Boolean strategyThumbup(Long userId, Long sid) {
@@ -203,5 +204,15 @@ public class StrategyStatisVOServiceImpl implements IStrategyStatisVOService {
         template.opsForValue().set(key, "value可以为任意字符串", time, TimeUnit.SECONDS);
 
         return true;
+    }
+
+
+    //根据攻略id判断redis中是否存在已经复制好的vo对象
+    @Override
+    public Boolean isStrategyExist(Long sid) {
+        //使用sid拼接出vo对象的key
+        String key = RedisKey.STRATEGY_STATIS_VO.join(sid.toString());
+
+        return template.hasKey(key);
     }
 }

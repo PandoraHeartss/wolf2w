@@ -35,4 +35,11 @@ public interface IStrategyStatisVOService {
     //返回true 表示点赞成功
     //放回false 表示点赞失败
     Boolean strategyThumbup(Long userId, Long sid);
+
+
+    //根据攻略id判断redis中是否存在已经复制好的vo对象
+    //返回true 表示存在
+    //返回false 表示不存在
+    Boolean isStrategyExist(Long sid);
+
 }
