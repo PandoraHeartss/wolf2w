@@ -12,6 +12,8 @@ import lombok.Setter;
 @Getter
 public enum RedisKey {
 
+    //攻略点赞key,失效时间为点前时间到当晚的最后一秒
+    STRATEGY_THUMBUP("strategy_thumbup", -1L),
 
     //攻略统计收藏 key，-1表示不设置超时
     STRATEGY_FAVOR_VO("strategy_favor_vo", -1L),
@@ -24,7 +26,6 @@ public enum RedisKey {
 
     //用户第一次登录的时候 要用token作为key
     USER_LOGIN_TOKEN("user_login_token", Consts.USER_INFO_TOKEN_VAI_TIME * 60L);
-
 
     @Setter
     private String prefix; //redis 的 key 的前缀

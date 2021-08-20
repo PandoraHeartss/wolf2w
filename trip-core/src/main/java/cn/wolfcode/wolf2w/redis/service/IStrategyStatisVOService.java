@@ -29,4 +29,10 @@ public interface IStrategyStatisVOService {
 
     //根据用户id查出攻略收藏id列表
     List<Long> queryStrategyFavorByUserId(Long userId);
+
+
+    //攻略点赞的实现
+    //返回true 表示点赞成功
+    //放回false 表示点赞失败
+    Boolean strategyThumbup(Long userId, Long sid);
 }

@@ -13,7 +13,7 @@ var vue = new Vue({
                 if (data.data) {
                     popup("顶成功啦");
                 } else {
-                    popup("今天你已经定过了");
+                    popup("今天你已经顶过了");
                 }
                 vue.queryStatisVo(vue.strategy.id);
             })

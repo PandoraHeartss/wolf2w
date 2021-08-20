@@ -85,4 +85,13 @@ public class StrategyController {
     }
 
 
+    //攻略点赞的实现
+    @RequireLogin
+    @PostMapping("/strategyThumbup")
+    public Object strategyThumbup(@UserParam UserInfo user, Long sid) {
+        Boolean thumbup = strategyStatisVOService.strategyThumbup(user.getId(), sid);
+        return JsonResult.success(thumbup);
+    }
+
+
 }

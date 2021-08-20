@@ -5,6 +5,7 @@ import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.redis.service.IStrategyStatisVOService;
 import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVO;
 import cn.wolfcode.wolf2w.service.IStrategyService;
+import cn.wolfcode.wolf2w.util.DateUtil;
 import cn.wolfcode.wolf2w.util.RedisKey;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -14,7 +15,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class StrategyStatisVOServiceImpl implements IStrategyStatisVOService {
@@ -167,5 +170,38 @@ public class StrategyStatisVOServiceImpl implements IStrategyStatisVOService {
         }
 
         return sidList;
+    }
+
+
+    //攻略点赞的实现
+    @Override
+    public Boolean strategyThumbup(Long userId, Long sid) {
+        //根据用户id 和 攻略id 拼接出redis Key
+        String key = RedisKey.STRATEGY_THUMBUP.join(userId.toString(), sid.toString());
+        //根据攻略id获取vo对象
+        StrategyStatisVO vo = this.getStatisVo(sid);
+
+        //判断是否有key
+        if (template.hasKey(key)) {
+            //如果key存在，则表示点前用户今天已经点过赞了，点赞失败，不做出任何操作
+            return false;
+        }
+
+        //如果key不存在,则表示该用户今天还没有点赞，点赞数加一
+        vo.setThumbsupnum(vo.getThumbsupnum() + 1);
+
+        //更新vo对象
+        this.setStatisVo(vo);
+
+        //用这个新的拼接key缓存redis里面，value可以为任意，
+        // 失效时间为当前时间到今天最后一秒
+
+        Date now = new Date();//当前时间
+        Date endDate = DateUtil.getEndDate(now);//当天的最后一秒
+        Long time = DateUtil.getDateBetween(now, endDate);//计算出相差多少秒
+
+        template.opsForValue().set(key, "value可以为任意字符串", time, TimeUnit.SECONDS);
+
+        return true;
     }
 }
