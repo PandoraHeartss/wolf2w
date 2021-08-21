@@ -4,8 +4,10 @@ import cn.wolfcode.wolf2w.domain.*;
 import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.mapper.StrategyMapper;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
+import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVO;
 import cn.wolfcode.wolf2w.service.IStrategyService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -65,6 +67,23 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper, Strategy> i
         wrapper.eq("dest_id", destId);
 
         return super.list(wrapper);
+    }
+
+
+    //更新统计数
+    @Override
+    public void updateStatisVO(StrategyStatisVO vo) {
+
+        UpdateWrapper<Strategy> wrapper = new UpdateWrapper<>();
+
+        wrapper.eq("id", vo.getStrategyId())
+                .set("viewnum", vo.getViewnum())
+                .set("replynum", vo.getReplynum())
+                .set("favornum", vo.getFavornum())
+                .set("sharenum", vo.getSharenum())
+                .set("thumbsupnum", vo.getThumbsupnum());
+
+        super.update(wrapper);
     }
 
 

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -214,5 +215,26 @@ public class StrategyStatisVOServiceImpl implements IStrategyStatisVOService {
         String key = RedisKey.STRATEGY_STATIS_VO.join(sid.toString());
 
         return template.hasKey(key);
+    }
+
+
+    //通过查询规则查询所有vo对象
+    @Override
+    public List<StrategyStatisVO> queryVOByPattern(String pattern) {
+
+        List<StrategyStatisVO> vos = new ArrayList<>();
+        // keys strategy_statis_vo:*
+        //所有vo对象的key集合
+        Set<String> keys = template.keys(pattern);
+
+        if (keys != null && keys.size() > 0) {
+            for (String key : keys) {
+                String s = template.opsForValue().get(key);
+                StrategyStatisVO vo = JSON.parseObject(s, StrategyStatisVO.class);
+                vos.add(vo);
+            }
+        }
+
+        return vos;
     }
 }

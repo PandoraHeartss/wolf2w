@@ -42,4 +42,7 @@ public interface IStrategyStatisVOService {
     //返回false 表示不存在
     Boolean isStrategyExist(Long sid);
 
+
+    //通过查询规则查询所有vo对象
+    List<StrategyStatisVO> queryVOByPattern(String pattern);
 }

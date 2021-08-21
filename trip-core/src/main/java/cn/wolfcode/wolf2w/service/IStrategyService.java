@@ -3,6 +3,7 @@ package cn.wolfcode.wolf2w.service;
 import cn.wolfcode.wolf2w.domain.Strategy;
 import cn.wolfcode.wolf2w.domain.StrategyContent;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
+import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -47,4 +48,7 @@ public interface IStrategyService extends IService<Strategy> {
      * @return
      */
     List<Strategy> queryStrategyByDestId(Long destId);
+
+    //更新统计数
+    void updateStatisVO(StrategyStatisVO vo);
 }

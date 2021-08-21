@@ -93,5 +93,4 @@ public class StrategyController {
         return JsonResult.success(thumbup);
     }
 
-
 }
